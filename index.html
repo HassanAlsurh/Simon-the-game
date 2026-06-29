@@ -16,29 +16,34 @@
             <div id="Training-toggle">
                 <span>Training</span>
                 <label class="switch">
-                    <input type="checkbox">
+                    <input type="checkbox" id="gameMode">
                     <span class="slider round"></span>
                 </label>
             </div>
             <div id="help">
-                <!-- Help button -->
-                 
+                <!-- Help button (Expain the game)-->
+
             </div>
         </div>
         <div id="stats">
-
+            <div class="currentScore"><p>Current Score: 17</p></div>
+            <div class="bestScore"><p>Best Score: 17</p></div>
         </div>
     </div>
-
+    <br />
+    <br />
     <div id="Simon-circle">
         <div class="top-semi-circle">
-            <div class="circle" id="top-left"></div>
-            <div class="circle" id="top-right"></div>
+            <div class="circle top-left"></div>
+            <div class="circle top-right"></div>
         </div>
         <div class="bottom-semi-circle">
-            <div class="circle" id="bottom-left"></div>
-            <div class="circle" id="bottom-right"></div>
+            <div class="circle bottom-left"></div>
+            <div class="circle bottom-right"></div>
         </div>
+    </div>
+    <div id="centre-circle" style="align-content: center;">
+        <span style="display: flex; flex-direction: column; align-items: center; ">Simon</span>
     </div>
 
 </body>
