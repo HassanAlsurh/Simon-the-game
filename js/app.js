@@ -4,14 +4,18 @@ const finishCriteria = 25
 let sequence = []
 let userInput = []
 let currentGameMode = 'Simon'
+let currentScore = 0
+let bestScore = 0
 /*------------------------ Cached Element References ------------------------*/
 
 const topLeft = document.querySelector('.top-left')
 const topRight = document.querySelector('.top-right')
 const bottomLeft = document.querySelector('.bottom-left')
 const bottomRight = document.querySelector('.bottom-right')
-
 const gameMode = document.querySelector('#gameMode')
+const currentScoreEl = document.querySelector('#currentScore')
+const BestScoreEl = document.querySelector('#bestScore')
+
 
 /*----------------------------- Event Listeners -----------------------------*/
 
@@ -32,24 +36,34 @@ gameMode.addEventListener('change', () => {
 /*-------------------------------- Functions --------------------------------*/
 nextSequence()
 
+
+function setcurrentScore() {
+
+    currentScore = sequence.length
+    currentScoreEl.textContent = `Current Score: ${currentScore}`
+    if ( currentScore > bestScore ) {
+        bestScore = currentScore
+        BestScoreEl.textContent = `Best Score: ${bestScore}`
+    }
+
+
+    console.log('currentScore: '+currentScore +' bestScore: '+ bestScore)
+}
+
 //a function to change the class of the color to '.click' when the sequence gets generated
 function assignClickClass() {
     // topLeft.classList += 'click'
     // topLeft.id = 'banana'
 
     for (let i = 0; i < sequence.length; i++) {
-        if (sequence[i] ===0){
+        if (sequence[i] === 0) {
             topLeft.id = 'active'
-        }else if (sequence[i] ===1){
+        } else if (sequence[i] === 1) {
             topRight.id = 'active'
-        }else if (sequence[i] ===2){
+        } else if (sequence[i] === 2) {
             bottomLeft.id = 'active'
-        }else if (sequence[i] ===3){
+        } else if (sequence[i] === 3) {
             bottomRight.id = 'active'
-        }
-        else{
-            //Delete after testing
-            alert('Something went wrong')
         }
     }
 }
@@ -58,16 +72,17 @@ function assignClickClass() {
 // function to add a new button/ to the sequence array...  || generates the same number time after the another alot
 function nextSequence() {
     sequence.push(Math.floor(Math.random() * 4))
-    console.log(sequence)
+    // console.log(sequence)
     assignClickClass()
 }
 
 
 //for testing
-topLeft.addEventListener('click', () => { 
-    nextSequence() 
-    console.log(sequence)
- })
+topLeft.addEventListener('click', () => {
+    nextSequence()
+    setcurrentScore()
+    // console.log(sequence)
+})
 
 
 
