@@ -6,6 +6,7 @@ let userInput = []
 let currentGameMode = 'Simon'
 let currentScore = 0
 let bestScore = 0
+let currentIndexToPress = 0
 /*------------------------ Cached Element References ------------------------*/
 
 const topLeft = document.querySelector('.top-left')
@@ -19,10 +20,22 @@ const BestScoreEl = document.querySelector('#bestScore')
 
 /*----------------------------- Event Listeners -----------------------------*/
 
-topLeft.addEventListener('click', () => { console.log(topLeft) })
-topRight.addEventListener('click', () => { console.log(topRight) })
-bottomLeft.addEventListener('click', () => { console.log(bottomLeft) })
-bottomRight.addEventListener('click', () => { console.log(bottomRight) })
+topLeft.addEventListener('click', () => {
+    console.log('clicked topLeft')
+    buttonPress(0)
+})
+topRight.addEventListener('click', () => {
+    console.log('clicked topRight')
+    buttonPress(1)
+})
+bottomLeft.addEventListener('click', () => {
+    console.log('clicked bottomLeft')
+    buttonPress(2)
+})
+bottomRight.addEventListener('click', () => {
+    console.log('clicked bottomRight')
+    buttonPress(3)
+})
 
 //Set game mode
 gameMode.addEventListener('change', () => {
@@ -41,13 +54,13 @@ function setcurrentScore() {
 
     currentScore = sequence.length
     currentScoreEl.textContent = `Current Score: ${currentScore}`
-    if ( currentScore > bestScore ) {
+    if (currentScore > bestScore) {
         bestScore = currentScore
         BestScoreEl.textContent = `Best Score: ${bestScore}`
     }
 
 
-    console.log('currentScore: '+currentScore +' bestScore: '+ bestScore)
+    // console.log('currentScore: '+currentScore +' bestScore: '+ bestScore)
 }
 
 //a function to change the class of the color to '.click' when the sequence gets generated
@@ -72,7 +85,7 @@ function assignClickClass() {
 // function to add a new button/ to the sequence array...  || generates the same number time after the another alot
 function nextSequence() {
     sequence.push(Math.floor(Math.random() * 4))
-    // console.log(sequence)
+    console.log(sequence)
     assignClickClass()
 }
 
@@ -90,6 +103,19 @@ topLeft.addEventListener('click', () => {
 //Add a reset function... to reset the sequence when game mode is 'Simon',,,
 
 //Add a function to be activated each time the user clicks the right button after the sequence,, if the sequence size is === to finishCriteria then user has won the game
+function buttonPress(button) {
+    if (button === sequence[currentIndexToPress]){
+
+        if(currentIndexToPress === finishCriteria){
+            //set game as finished || user Won
+        }
+        currentIndexToPress++
+    }
+    else{
+        //check game mode.. if 'Simon' set game as finished.. gameover/user lost.. give user a way to start again without resetting Best Score
+    }
+}
+
 
 //function to update the current Score each time the user clicks the right button after the sequence /// and if the current Score is > than the Best score update the BEst score too.
 
