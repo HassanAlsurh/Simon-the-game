@@ -8,6 +8,7 @@ let gameStart = false
 let currentScore = 0
 let bestScore = 0
 let currentIndexToPress = 0
+let timeOut = 1000
 /*------------------------ Cached Element References ------------------------*/
 
 const topLeftEl = document.querySelector('.top-left')
@@ -93,26 +94,54 @@ function setcurrentScore() {
 
 //a function to change the class of the color to '.click' when the sequence gets generated
 //add a timeout to onlt flash the class(color) and then it turns off.. so it looks like a glow of light
+let i = 0
 function assignClickClass() {
-    for (let i = 0; i < sequence.length; i++) {
 
+    // for (let i = 0; i < sequence.length; i++) {
+    // }
 
+    if (i > sequence.length) {
+        console.log(' 1 sequence length: ' + sequence.length + '. i= ' + i)
+        i = 0
+        return
+    } else {
+        
         if (sequence[i] === 0) {
             topLeftEl.id = 'active'
-            setTimeout(() => { topLeftEl.id = '' }, 1000)
+            setTimeout(() => { topLeftEl.id = '' }, timeOut)
+            // assignClickClass()
+
         } else if (sequence[i] === 1) {
             topRightEl.id = 'active'
-            setTimeout(() => { topLeftEl.id = '' }, 1000)
+            setTimeout(() => { topRightEl.id = '' }, timeOut)
+            // assignClickClass()
+
         } else if (sequence[i] === 2) {
-            setTimeout(() => { topLeftEl.id = '' }, 1000)
             bottomLeftEl.id = 'active'
+            setTimeout(() => { bottomLeftEl.id = '' }, timeOut)
+            // assignClickClass()
+
         } else if (sequence[i] === 3) {
             bottomRightEl.id = 'active'
-            setTimeout(() => { topLeftEl.id = '' }, 1000)
+            setTimeout(() => { bottomRightEl.id = '' }, timeOut)
+            // assignClickClass()
+            
+        } else {
+            console.log(' Something went wrong... sequence length: ' + sequence.length + '. i= ' + i)
+            i = 0
+            return
         }
-
+        
+        console.log(' 2 sequence length: ' + sequence.length + '. i= ' + i)
+        i++
+        setTimeout(() => { 
+            assignClickClass()
+        }, timeOut+100)
+        console.log(' 3 sequence length: ' + sequence.length + '. i= ' + i)
+        console.log(sequence)
 
     }
+
 }
 
 
@@ -138,7 +167,7 @@ function resetSequence() {
         startEl.classList = ''
         gameStart = false
         startEl.textContent = 'Off'
-        
+
 
     } else if (currentGameMode === 'Training') {
         console.log('game mode is training, cannnot reset the sequence!')
