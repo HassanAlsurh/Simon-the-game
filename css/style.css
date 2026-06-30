@@ -31,24 +31,24 @@ body {
     gap: 5px;
 }
 
-.top-right {
-    background-color: yellow;
-    border-radius: 0 100% 0 0;
-}
-
 .top-left {
-    background-color: red;
+    background-color: rgba(155,0,0,1);
     border-radius: 100% 0 0 0;
 }
 
-.bottom-right {
-    background-color: blue;
-    border-radius: 0 0 100% 0;
+.top-right {
+    background-color: rgba(155,155,0,1);
+    border-radius: 0 100% 0 0;
 }
 
 .bottom-left {
-    background-color: green;
+    background-color: rgba(0,98,0,1);
     border-radius: 0 0 0 100%;
+}
+
+.bottom-right {
+    background-color: rgba(0,0,95,1);
+    border-radius: 0 0 100% 0;
 }
 
 #centre-circle {
@@ -60,13 +60,10 @@ body {
     border-radius: 100%;
 }
 
-.circle:hover {
-    box-shadow: inset 0 0 0 5px rgb(245, 245, 245);
-    /* Inner border color and width ... (from google: how to make an inside "border" color when user hover over a button)*/
-}
 
+/* to be removed ⬇️*/
 .Click {
-    background-color: black;
+    background-color: red;
 }
 
 #stats {
@@ -107,9 +104,40 @@ body {
 
 
 
+.circle:hover {
+    box-shadow: inset 0 0 0 5px rgb(245, 245, 245);
+    /* Inner border color and width ... (from google: how to make an inside "border" color when user hover over a button)*/
+}
+.top-left:active {
+    background-color: red;
+}
+.top-right:active {
+    background-color: yellow;
+}
+.bottom-left:active {
+    background-color: green;
+}
+.bottom-right:active {
+    background-color: yellow;
+}
 
-#active {
-    background-color: white;
+#active.top-left {
+    background-color: red;
+    box-shadow: inset 0 0 0 5px rgb(245, 245, 245);
+    /* Inner border color and width ... (from google: how to make an inside "border" color when user hover over a button)*/
+}
+#active.top-right {
+    background-color: yellow;
+    box-shadow: inset 0 0 0 5px rgb(245, 245, 245);
+    /* Inner border color and width ... (from google: how to make an inside "border" color when user hover over a button)*/
+}
+#active.bottom-left {
+    background-color: green;
+    box-shadow: inset 0 0 0 5px rgb(245, 245, 245);
+    /* Inner border color and width ... (from google: how to make an inside "border" color when user hover over a button)*/
+}
+#active.bottom-right {
+    background-color: blue;
     box-shadow: inset 0 0 0 5px rgb(245, 245, 245);
     /* Inner border color and width ... (from google: how to make an inside "border" color when user hover over a button)*/
 }
