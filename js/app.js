@@ -108,7 +108,7 @@ function assignClickClass() {
     // for (let i = 0; i < sequence.length; i++) {
     // }
 
-    if (i > sequence.length) {
+    if (i >= sequence.length) {
         // console.log(' 1 sequence length: ' + sequence.length + '. i= ' + i)
         i = 0
         return
@@ -145,8 +145,9 @@ function assignClickClass() {
         setTimeout(() => { 
             assignClickClass()
         }, timeOut+100)
+
         // console.log(' 3 sequence length: ' + sequence.length + '. i= ' + i)
-        // console.log(sequence)
+        console.log('user needs to play: ' + (currentIndexToPress+1))
 
     }
 
@@ -177,6 +178,7 @@ function resetSequence() {
         gameStart = false
         startEl.textContent = 'Off'
         userInput = []
+        currentIndexToPress = 0
 
 
     } else if (currentGameMode === 'Training') {
@@ -189,6 +191,7 @@ function resetSequence() {
 //Add a function to be activated each time the user clicks the right button after the sequence,, if the sequence size is === to finishCriteria then user has won the game
 function buttonPress() {
 
+    let statusFailed = false
     // console.log('outside the for loop')
 
     console.log('userinput: '+userInput)
@@ -210,15 +213,21 @@ function buttonPress() {
             // User pressed 
             //check game mode.. if = 'Simon' set game as finished.. gameover/user lost.. give user a way to start again without resetting Best Score
             console.log('incorrect button')
-            resetSequence()
+
+            if (currentGameMode === 'Simon'){
+                resetSequence()
+                statusFailed = true
+            }else if (currentGameMode === 'Training'){
+                userInput = []
+                assignClickClass()
+                return
+            }
             
-            
-            //maybe the following needs to be in teh reset function
             //Show to user that the game ended because they entered wrong button..
             //set startbutton to inactive.. buttons inert etc...
         }
     }
-    
+
     if (currentIndexToPress === finishCriteria) {
         //set game as finished || user Won
         gameStart = false
@@ -230,10 +239,11 @@ function buttonPress() {
         bottomLeftEl.inert = true
         bottomRightEl.inert = true
 
-    }else{
+    }
+    else if (!statusFailed) {
         setcurrentScore()
         nextSequence()
-        // currentIndexToPress++
+        currentIndexToPress++
     }
     userInput = []
 }
