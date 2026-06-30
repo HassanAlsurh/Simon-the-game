@@ -25,19 +25,27 @@ const startEl = document.querySelector('#start')
 
 topLeftEl.addEventListener('click', () => {
     // console.log('clicked topLeftEl')
-    buttonPress(0)
+    userInput.push(0)
+    buttonPress()
+    // buttonPress(0)
 })
 topRightEl.addEventListener('click', () => {
     // console.log('clicked topRightEl')
-    buttonPress(1)
+    userInput.push(1)
+    buttonPress()
+    // buttonPress(1)
 })
 bottomLeftEl.addEventListener('click', () => {
     // console.log('clicked bottomLeftEl')
-    buttonPress(2)
+    userInput.push(2)
+    buttonPress()
+    // buttonPress(2)
 })
 bottomRightEl.addEventListener('click', () => {
     // console.log('clicked bottomRightEl')
-    buttonPress(3)
+    userInput.push(3)
+    buttonPress()
+    // buttonPress(3)
 })
 
 //Set game mode
@@ -168,6 +176,7 @@ function resetSequence() {
         startEl.classList = ''
         gameStart = false
         startEl.textContent = 'Off'
+        userInput = []
 
 
     } else if (currentGameMode === 'Training') {
@@ -178,15 +187,20 @@ function resetSequence() {
 }
 
 //Add a function to be activated each time the user clicks the right button after the sequence,, if the sequence size is === to finishCriteria then user has won the game
-function buttonPress(button) {
+function buttonPress() {
 
     // console.log('outside the for loop')
 
+    console.log('userinput: '+userInput)
+
+    if ( userInput.length === sequence.length){
+
+    
     for (let index = 0; index <= currentIndexToPress; index++) {
 
-        console.log('index= ' + index + '... current sequence: '+ sequence[index]+ ' ... user pressed: '+ button)
+        console.log('index= ' + index + '... current sequence: '+ sequence[index]+ ' ... user pressed: '+ userInput[index])
 
-        if ( parseInt(button)  === parseInt(sequence[index])) {
+        if ( parseInt(userInput[index])  === parseInt(sequence[index])) {
 
             console.log('correct button')
 
@@ -217,6 +231,8 @@ function buttonPress(button) {
             //set startbutton to inactive.. buttons inert etc...
         }
     }
+    userInput = []
+}
 }
 
 
@@ -235,7 +251,51 @@ function buttonPress(button) {
 
 // //for testing
 // topLeftEl.addEventListener('click', () => {
-//     nextSequence()
-//     setcurrentScore()
-//     // console.log(sequence)
-// })
+    //     nextSequence()
+    //     setcurrentScore()
+    //     // console.log(sequence)
+    // })
+    
+
+
+    // //Add a function to be activated each time the user clicks the right button after the sequence,, if the sequence size is === to finishCriteria then user has won the game
+    // function buttonPress(button) {
+    
+    //     // console.log('outside the for loop')
+    
+    //     for (let index = 0; index <= currentIndexToPress; index++) {
+    
+    //         console.log('index= ' + index + '... current sequence: '+ sequence[index]+ ' ... user pressed: '+ button)
+    
+    //         if ( parseInt(button)  === parseInt(sequence[index])) {
+    
+    //             console.log('correct button')
+    
+    //             if (currentIndexToPress === finishCriteria) {
+    //                 //set game as finished || user Won
+    //                 gameStart = false
+    
+    //                 startEl.classList = ''
+    
+    //                 topLeftEl.inert = true
+    //                 topRightEl.inert = true
+    //                 bottomLeftEl.inert = true
+    //                 bottomRightEl.inert = true
+    
+    //             }
+    
+    //             nextSequence()
+    
+    //         } else {
+    //             // User pressed 
+    //             //check game mode.. if = 'Simon' set game as finished.. gameover/user lost.. give user a way to start again without resetting Best Score
+    //             console.log('incorrect button')
+    //             resetSequence()
+                
+    
+    //             //maybe the following needs to be in teh reset function
+    //             //Show to user that the game ended because they entered wrong button..
+    //             //set startbutton to inactive.. buttons inert etc...
+    //         }
+    //     }
+    // }
