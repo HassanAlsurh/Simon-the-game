@@ -101,7 +101,7 @@ function assignClickClass() {
     // }
 
     if (i > sequence.length) {
-        console.log(' 1 sequence length: ' + sequence.length + '. i= ' + i)
+        // console.log(' 1 sequence length: ' + sequence.length + '. i= ' + i)
         i = 0
         return
     } else {
@@ -127,18 +127,18 @@ function assignClickClass() {
             // assignClickClass()
             
         } else {
-            console.log(' Something went wrong... sequence length: ' + sequence.length + '. i= ' + i)
+            // console.log(' Something went wrong... sequence length: ' + sequence.length + '. i= ' + i)
             i = 0
             return
         }
         
-        console.log(' 2 sequence length: ' + sequence.length + '. i= ' + i)
+        // console.log(' 2 sequence length: ' + sequence.length + '. i= ' + i)
         i++
         setTimeout(() => { 
             assignClickClass()
         }, timeOut+100)
-        console.log(' 3 sequence length: ' + sequence.length + '. i= ' + i)
-        console.log(sequence)
+        // console.log(' 3 sequence length: ' + sequence.length + '. i= ' + i)
+        // console.log(sequence)
 
     }
 
@@ -150,6 +150,7 @@ function nextSequence() {
     sequence.push(Math.floor(Math.random() * 4))
     console.log(sequence)
     assignClickClass()
+    // currentIndexToPress++
 }
 
 
@@ -183,9 +184,9 @@ function buttonPress(button) {
 
     for (let index = 0; index <= currentIndexToPress; index++) {
 
-        console.log('index= ' + index)
+        console.log('index= ' + index + '... current sequence: '+ sequence[index]+ ' ... user pressed: '+ button)
 
-        if (button === sequence[index]) {
+        if ( parseInt(button)  === parseInt(sequence[index])) {
 
             console.log('correct button')
 
@@ -202,12 +203,14 @@ function buttonPress(button) {
 
             }
 
-            currentIndexToPress++
+            nextSequence()
 
         } else {
+            // User pressed 
             //check game mode.. if = 'Simon' set game as finished.. gameover/user lost.. give user a way to start again without resetting Best Score
             console.log('incorrect button')
             resetSequence()
+            
 
             //maybe the following needs to be in teh reset function
             //Show to user that the game ended because they entered wrong button..
