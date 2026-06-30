@@ -132,7 +132,7 @@ body {
     background-color: rgb(11, 173, 11);
 }
 .bottom-right:active {
-    background-color: yellow;
+    background-color: blue;
 }
 
 #active.top-left {

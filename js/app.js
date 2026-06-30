@@ -58,7 +58,10 @@ gameModeEl.addEventListener('change', () => {
 })
 
 startEl.addEventListener('click', () => {
-    if (!gameStart) {
+
+    const localFunction = (cond) => {
+
+        if (cond === 0) {
         gameStart = true
         nextSequence()
         startEl.classList = 'active'
@@ -66,25 +69,41 @@ startEl.addEventListener('click', () => {
         topRightEl.inert = false
         bottomLeftEl.inert = false
         bottomRightEl.inert = false
-    } else {
+        } 
+        else if (cond === 1) {
         gameStart = false
         startEl.classList = ''
         topLeftEl.inert = true
         topRightEl.inert = true
         bottomLeftEl.inert = true
         bottomRightEl.inert = true
+        }       
+        else if (cond === 2) {
+        i = 0
+        assignClickClass()
+        gameStart = true
+        startEl.classList = 'active'
+        topLeftEl.inert = false
+        topRightEl.inert = false
+        bottomLeftEl.inert = false
+        bottomRightEl.inert = false
+        }       
     }
-
-    if (startEl.textContent === 'Start' || startEl.textContent === 'Off') {
+    
+    if (startEl.textContent === 'Start' ) {
         startEl.textContent = 'On'
+        localFunction(0)
+
     } else if (startEl.textContent === 'On') {
         startEl.textContent = 'Off'
+        localFunction(1)
+    }else if ( startEl.textContent === 'Off'){
+        startEl.textContent = 'On'
+        localFunction(2)
     }
 }
 )
 /*-------------------------------- Functions --------------------------------*/
-// if teh user clicks the start button,, add class to teh button '.active' and call the function:
-// nextSequence()
 
 topLeftEl.inert = true
 topRightEl.inert = true
@@ -100,57 +119,54 @@ function setcurrentScore() {
     }
 }
 
-//a function to change the class of the color to '.click' when the sequence gets generated
-//add a timeout to onlt flash the class(color) and then it turns off.. so it looks like a glow of light
+
+
 let i = 0
 function assignClickClass() {
-
-    // for (let i = 0; i < sequence.length; i++) {
-    // }
-
-    if (i >= sequence.length) {
-        // console.log(' 1 sequence length: ' + sequence.length + '. i= ' + i)
-        i = 0
-        return
-    } else {
         
-        if (sequence[i] === 0) {
-            topLeftEl.id = 'active'
-            setTimeout(() => { topLeftEl.id = '' }, timeOut)
-            // assignClickClass()
-
-        } else if (sequence[i] === 1) {
-            topRightEl.id = 'active'
-            setTimeout(() => { topRightEl.id = '' }, timeOut)
-            // assignClickClass()
-
-        } else if (sequence[i] === 2) {
-            bottomLeftEl.id = 'active'
-            setTimeout(() => { bottomLeftEl.id = '' }, timeOut)
-            // assignClickClass()
-
-        } else if (sequence[i] === 3) {
-            bottomRightEl.id = 'active'
-            setTimeout(() => { bottomRightEl.id = '' }, timeOut)
-            // assignClickClass()
-            
-        } else {
-            // console.log(' Something went wrong... sequence length: ' + sequence.length + '. i= ' + i)
+        if (i >= sequence.length) {
+            // console.log(' 1 sequence length: ' + sequence.length + '. i= ' + i)
             i = 0
             return
+        } else {
+            
+            if (sequence[i] === 0) {
+                topLeftEl.id = 'active'
+                setTimeout(() => { topLeftEl.id = '' }, timeOut)
+                // assignClickClass()
+                
+            } else if (sequence[i] === 1) {
+                topRightEl.id = 'active'
+                setTimeout(() => { topRightEl.id = '' }, timeOut)
+                // assignClickClass()
+                
+            } else if (sequence[i] === 2) {
+                bottomLeftEl.id = 'active'
+                setTimeout(() => { bottomLeftEl.id = '' }, timeOut)
+                // assignClickClass()
+                
+            } else if (sequence[i] === 3) {
+                bottomRightEl.id = 'active'
+                setTimeout(() => { bottomRightEl.id = '' }, timeOut)
+                // assignClickClass()
+                
+            } else {
+                // console.log(' Something went wrong... sequence length: ' + sequence.length + '. i= ' + i)
+                i = 0
+                return
+            }
+            
+            // console.log(' 2 sequence length: ' + sequence.length + '. i= ' + i)
+            i++
+            setTimeout(() => { 
+                assignClickClass()
+            }, timeOut+100)
+            
+            // console.log(' 3 sequence length: ' + sequence.length + '. i= ' + i)
+            console.log('user needs to play: ' + (currentIndexToPress+1))
+            
         }
         
-        // console.log(' 2 sequence length: ' + sequence.length + '. i= ' + i)
-        i++
-        setTimeout(() => { 
-            assignClickClass()
-        }, timeOut+100)
-
-        // console.log(' 3 sequence length: ' + sequence.length + '. i= ' + i)
-        console.log('user needs to play: ' + (currentIndexToPress+1))
-
-    }
-
 }
 
 
@@ -179,41 +195,41 @@ function resetSequence() {
         startEl.textContent = 'Off'
         userInput = []
         currentIndexToPress = 0
-
-
+        
+        
     } else if (currentGameMode === 'Training') {
         console.log('game mode is training, cannnot reset the sequence!')
         console.log(sequence)
-
+        
     }
 }
 
 //Add a function to be activated each time the user clicks the right button after the sequence,, if the sequence size is === to finishCriteria then user has won the game
 function buttonPress() {
-
+    
     let statusFailed = false
     // console.log('outside the for loop')
-
-    console.log('userinput: '+userInput)
-
-    if ( userInput.length === sequence.length){
-
     
-    for (let index = 0; index < userInput.length ; index++) {
-
+    console.log('userinput: '+userInput)
+    
+    if ( userInput.length === sequence.length){
+        
+        
+        for (let index = 0; index < userInput.length ; index++) {
+            
         console.log('index= ' + index + '... current sequence: '+ sequence[index]+ ' ... user pressed: '+ userInput[index])
-
+        
         if ( parseInt(userInput[index])  === parseInt(sequence[index])) {
-
+            
             console.log('correct button')
-
+            
             
             
         } else {
             // User pressed 
             //check game mode.. if = 'Simon' set game as finished.. gameover/user lost.. give user a way to start again without resetting Best Score
             console.log('incorrect button')
-
+            
             if (currentGameMode === 'Simon'){
                 resetSequence()
                 statusFailed = true
@@ -227,18 +243,18 @@ function buttonPress() {
             //set startbutton to inactive.. buttons inert etc...
         }
     }
-
+    
     if (currentIndexToPress === finishCriteria) {
         //set game as finished || user Won
         gameStart = false
-
+        
         startEl.classList = ''
-
+        
         topLeftEl.inert = true
         topRightEl.inert = true
         bottomLeftEl.inert = true
         bottomRightEl.inert = true
-
+        
     }
     else if (!statusFailed) {
         setcurrentScore()
@@ -271,45 +287,65 @@ function buttonPress() {
     // })
     
 
-
+    
     // //Add a function to be activated each time the user clicks the right button after the sequence,, if the sequence size is === to finishCriteria then user has won the game
     // function buttonPress(button) {
-    
+        
     //     // console.log('outside the for loop')
     
     //     for (let index = 0; index <= currentIndexToPress; index++) {
-    
+        
     //         console.log('index= ' + index + '... current sequence: '+ sequence[index]+ ' ... user pressed: '+ button)
     
     //         if ( parseInt(button)  === parseInt(sequence[index])) {
-    
+        
     //             console.log('correct button')
     
     //             if (currentIndexToPress === finishCriteria) {
-    //                 //set game as finished || user Won
-    //                 gameStart = false
-    
-    //                 startEl.classList = ''
-    
-    //                 topLeftEl.inert = true
-    //                 topRightEl.inert = true
-    //                 bottomLeftEl.inert = true
-    //                 bottomRightEl.inert = true
-    
-    //             }
-    
-    //             nextSequence()
-    
-    //         } else {
-    //             // User pressed 
-    //             //check game mode.. if = 'Simon' set game as finished.. gameover/user lost.. give user a way to start again without resetting Best Score
-    //             console.log('incorrect button')
-    //             resetSequence()
-                
-    
-    //             //maybe the following needs to be in teh reset function
-    //             //Show to user that the game ended because they entered wrong button..
-    //             //set startbutton to inactive.. buttons inert etc...
-    //         }
-    //     }
-    // }
+        //                 //set game as finished || user Won
+        //                 gameStart = false
+        
+        //                 startEl.classList = ''
+        
+        //                 topLeftEl.inert = true
+        //                 topRightEl.inert = true
+        //                 bottomLeftEl.inert = true
+        //                 bottomRightEl.inert = true
+        
+        //             }
+        
+        //             nextSequence()
+        
+        //         } else {
+            //             // User pressed 
+            //             //check game mode.. if = 'Simon' set game as finished.. gameover/user lost.. give user a way to start again without resetting Best Score
+            //             console.log('incorrect button')
+            //             resetSequence()
+            
+            
+            //             //maybe the following needs to be in teh reset function
+            //             //Show to user that the game ended because they entered wrong button..
+            //             //set startbutton to inactive.. buttons inert etc...
+            //         }
+            //     }
+            // }
+            
+
+
+            
+                // if (!gameStart) {
+                //     gameStart = true
+                //     nextSequence()
+                //     startEl.classList = 'active'
+                //     topLeftEl.inert = false
+                //     topRightEl.inert = false
+                //     bottomLeftEl.inert = false
+                //     bottomRightEl.inert = false
+                // } else {
+                //     gameStart = false
+                //     startEl.classList = ''
+                //     topLeftEl.inert = true
+                //     topRightEl.inert = true
+                //     bottomLeftEl.inert = true
+                //     bottomRightEl.inert = true
+                // }
