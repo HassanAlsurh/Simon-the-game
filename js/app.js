@@ -10,11 +10,11 @@ let bestScore = 0
 let currentIndexToPress = 0
 /*------------------------ Cached Element References ------------------------*/
 
-const topLeft = document.querySelector('.top-left')
-const topRight = document.querySelector('.top-right')
-const bottomLeft = document.querySelector('.bottom-left')
-const bottomRight = document.querySelector('.bottom-right')
-const gameMode = document.querySelector('#gameMode')
+const topLeftEl = document.querySelector('.top-left')
+const topRightEl = document.querySelector('.top-right')
+const bottomLeftEl = document.querySelector('.bottom-left')
+const bottomRightEl = document.querySelector('.bottom-right')
+const gameModeEl = document.querySelector('#gameMode')
 const currentScoreEl = document.querySelector('#currentScore')
 const BestScoreEl = document.querySelector('#bestScore')
 const startEl = document.querySelector('#start')
@@ -22,54 +22,54 @@ const startEl = document.querySelector('#start')
 
 /*----------------------------- Event Listeners -----------------------------*/
 
-topLeft.addEventListener('click', () => {
-    console.log('clicked topLeft')
+topLeftEl.addEventListener('click', () => {
+    // console.log('clicked topLeftEl')
     buttonPress(0)
 })
-topRight.addEventListener('click', () => {
-    console.log('clicked topRight')
+topRightEl.addEventListener('click', () => {
+    // console.log('clicked topRightEl')
     buttonPress(1)
 })
-bottomLeft.addEventListener('click', () => {
-    console.log('clicked bottomLeft')
+bottomLeftEl.addEventListener('click', () => {
+    // console.log('clicked bottomLeftEl')
     buttonPress(2)
 })
-bottomRight.addEventListener('click', () => {
-    console.log('clicked bottomRight')
+bottomRightEl.addEventListener('click', () => {
+    // console.log('clicked bottomRightEl')
     buttonPress(3)
 })
 
-topLeft.inert = true
-topRight.inert = true
-bottomLeft.inert = true
-bottomRight.inert = true
-
 //Set game mode
-gameMode.addEventListener('change', () => {
-    if (gameMode.checked) {
+gameModeEl.addEventListener('change', () => {
+    if (gameModeEl.checked) {
         currentGameMode = 'Training'
     } else {
         currentGameMode = 'Simon'
     }
 })
 
-
 startEl.addEventListener('click', () => {
     if (!gameStart) {
         gameStart = true
         nextSequence()
         startEl.classList = 'active'
-        topLeft.inert = false
-        topRight.inert = false
-        bottomLeft.inert = false
-        bottomRight.inert = false
+        topLeftEl.inert = false
+        topRightEl.inert = false
+        bottomLeftEl.inert = false
+        bottomRightEl.inert = false
     } else {
         gameStart = false
         startEl.classList = ''
-        topLeft.inert = true
-        topRight.inert = true
-        bottomLeft.inert = true
-        bottomRight.inert = true
+        topLeftEl.inert = true
+        topRightEl.inert = true
+        bottomLeftEl.inert = true
+        bottomRightEl.inert = true
+    }
+
+    if (startEl.textContent === 'Start' || startEl.textContent === 'Off') {
+        startEl.textContent = 'On'
+    } else if (startEl.textContent === 'On') {
+        startEl.textContent = 'Off'
     }
 }
 )
@@ -77,33 +77,41 @@ startEl.addEventListener('click', () => {
 // if teh user clicks the start button,, add class to teh button '.active' and call the function:
 // nextSequence()
 
+topLeftEl.inert = true
+topRightEl.inert = true
+bottomLeftEl.inert = true
+bottomRightEl.inert = true
 
 function setcurrentScore() {
-
     currentScore = sequence.length
     currentScoreEl.textContent = `Current Score: ${currentScore}`
     if (currentScore > bestScore) {
         bestScore = currentScore
         BestScoreEl.textContent = `Best Score: ${bestScore}`
     }
-    // console.log('currentScore: '+currentScore +' bestScore: '+ bestScore)
 }
 
 //a function to change the class of the color to '.click' when the sequence gets generated
+//add a timeout to onlt flash the class(color) and then it turns off.. so it looks like a glow of light
 function assignClickClass() {
-    // topLeft.classList += 'click'
-    // topLeft.id = 'banana'
-
     for (let i = 0; i < sequence.length; i++) {
+
+
         if (sequence[i] === 0) {
-            topLeft.id = 'active'
+            topLeftEl.id = 'active'
+            setTimeout(() => { topLeftEl.id = '' }, 1000)
         } else if (sequence[i] === 1) {
-            topRight.id = 'active'
+            topRightEl.id = 'active'
+            setTimeout(() => { topLeftEl.id = '' }, 1000)
         } else if (sequence[i] === 2) {
-            bottomLeft.id = 'active'
+            setTimeout(() => { topLeftEl.id = '' }, 1000)
+            bottomLeftEl.id = 'active'
         } else if (sequence[i] === 3) {
-            bottomRight.id = 'active'
+            bottomRightEl.id = 'active'
+            setTimeout(() => { topLeftEl.id = '' }, 1000)
         }
+
+
     }
 }
 
@@ -116,32 +124,26 @@ function nextSequence() {
 }
 
 
-
-
-//for testing
-topLeft.addEventListener('click', () => {
-    nextSequence()
-    setcurrentScore()
-    // console.log(sequence)
-})
-
-// topLeft.inert = true
-
-
-// only for a button
-// startEl.disabled = true
-
-
-
 //Add a reset function... to reset the sequence when game mode is 'Simon',,,
 function resetSequence() {
     if (currentGameMode === 'Simon') {
         sequence = []
         console.log(sequence)
+        currentScore = 0
         //maybe I will need other things here.. like , turn start = false and buttons to be inert etc...
-    }else if (currentGameMode === 'Training'){
+        topLeftEl.inert = true
+        topRightEl.inert = true
+        bottomLeftEl.inert = true
+        bottomRightEl.inert = true
+        startEl.classList = ''
+        gameStart = false
+        startEl.textContent = 'Off'
+        
+
+    } else if (currentGameMode === 'Training') {
         console.log('game mode is training, cannnot reset the sequence!')
         console.log(sequence)
+
     }
 }
 
@@ -162,18 +164,25 @@ function buttonPress(button) {
                 //set game as finished || user Won
                 gameStart = false
 
+                startEl.classList = ''
 
-                topLeft.inert = true
-                topRight.inert = true
-                bottomLeft.inert = true
-                bottomRight.inert = true
+                topLeftEl.inert = true
+                topRightEl.inert = true
+                bottomLeftEl.inert = true
+                bottomRightEl.inert = true
+
             }
 
             currentIndexToPress++
+
         } else {
             //check game mode.. if = 'Simon' set game as finished.. gameover/user lost.. give user a way to start again without resetting Best Score
             console.log('incorrect button')
             resetSequence()
+
+            //maybe the following needs to be in teh reset function
+            //Show to user that the game ended because they entered wrong button..
+            //set startbutton to inactive.. buttons inert etc...
         }
     }
 }
@@ -186,3 +195,15 @@ function buttonPress(button) {
 /*--------------------------------------------------------------------------------*/
 /*-------------------------------- Code GraveYard --------------------------------*/
 /*--------------------------------------------------------------------------------*/
+
+// only for a button
+// startEl.disabled = true
+//works for other things
+// topLeftEl.inert = true
+
+// //for testing
+// topLeftEl.addEventListener('click', () => {
+//     nextSequence()
+//     setcurrentScore()
+//     // console.log(sequence)
+// })
