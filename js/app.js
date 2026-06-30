@@ -4,6 +4,7 @@ const finishCriteria = 25
 let sequence = []
 let userInput = []
 let currentGameMode = 'Simon'
+let gameStart = false
 let currentScore = 0
 let bestScore = 0
 let currentIndexToPress = 0
@@ -16,6 +17,7 @@ const bottomRight = document.querySelector('.bottom-right')
 const gameMode = document.querySelector('#gameMode')
 const currentScoreEl = document.querySelector('#currentScore')
 const BestScoreEl = document.querySelector('#bestScore')
+const startEl = document.querySelector('#start')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -46,8 +48,18 @@ gameMode.addEventListener('change', () => {
     }
 })
 
+startEl.addEventListener('click',()=>{
+    if (!gameStart){
+        gameStart = true
+        nextSequence()
+        startEl.classList = 'active'
+    }else{
+        gameStart = flase
+    }
+})
 /*-------------------------------- Functions --------------------------------*/
-nextSequence()
+// if teh user clicks the start button,, add class to teh button '.active' and call the function:
+// nextSequence()
 
 
 function setcurrentScore() {
