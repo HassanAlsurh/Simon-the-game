@@ -196,7 +196,7 @@ function buttonPress() {
     if ( userInput.length === sequence.length){
 
     
-    for (let index = 0; index <= currentIndexToPress; index++) {
+    for (let index = 0; index < userInput.length ; index++) {
 
         console.log('index= ' + index + '... current sequence: '+ sequence[index]+ ' ... user pressed: '+ userInput[index])
 
@@ -204,32 +204,36 @@ function buttonPress() {
 
             console.log('correct button')
 
-            if (currentIndexToPress === finishCriteria) {
-                //set game as finished || user Won
-                gameStart = false
-
-                startEl.classList = ''
-
-                topLeftEl.inert = true
-                topRightEl.inert = true
-                bottomLeftEl.inert = true
-                bottomRightEl.inert = true
-
-            }
-
-            nextSequence()
-
+            
+            
         } else {
             // User pressed 
             //check game mode.. if = 'Simon' set game as finished.. gameover/user lost.. give user a way to start again without resetting Best Score
             console.log('incorrect button')
             resetSequence()
             
-
+            
             //maybe the following needs to be in teh reset function
             //Show to user that the game ended because they entered wrong button..
             //set startbutton to inactive.. buttons inert etc...
         }
+    }
+    
+    if (currentIndexToPress === finishCriteria) {
+        //set game as finished || user Won
+        gameStart = false
+
+        startEl.classList = ''
+
+        topLeftEl.inert = true
+        topRightEl.inert = true
+        bottomLeftEl.inert = true
+        bottomRightEl.inert = true
+
+    }else{
+        setcurrentScore()
+        nextSequence()
+        // currentIndexToPress++
     }
     userInput = []
 }
