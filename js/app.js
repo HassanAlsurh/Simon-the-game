@@ -39,6 +39,11 @@ bottomRight.addEventListener('click', () => {
     buttonPress(3)
 })
 
+topLeft.inert = true
+topRight.inert = true
+bottomLeft.inert = true
+bottomRight.inert = true
+
 //Set game mode
 gameMode.addEventListener('change', () => {
     if (gameMode.checked) {
@@ -48,15 +53,26 @@ gameMode.addEventListener('change', () => {
     }
 })
 
-startEl.addEventListener('click',()=>{
-    if (!gameStart){
+
+startEl.addEventListener('click', () => {
+    if (!gameStart) {
         gameStart = true
         nextSequence()
         startEl.classList = 'active'
-    }else{
-        gameStart = flase
+        topLeft.inert = false
+        topRight.inert = false
+        bottomLeft.inert = false
+        bottomRight.inert = false
+    } else {
+        gameStart = false
+        startEl.classList = ''
+        topLeft.inert = true
+        topRight.inert = true
+        bottomLeft.inert = true
+        bottomRight.inert = true
     }
-})
+}
+)
 /*-------------------------------- Functions --------------------------------*/
 // if teh user clicks the start button,, add class to teh button '.active' and call the function:
 // nextSequence()
@@ -70,8 +86,6 @@ function setcurrentScore() {
         bestScore = currentScore
         BestScoreEl.textContent = `Best Score: ${bestScore}`
     }
-
-
     // console.log('currentScore: '+currentScore +' bestScore: '+ bestScore)
 }
 
@@ -102,6 +116,8 @@ function nextSequence() {
 }
 
 
+
+
 //for testing
 topLeft.addEventListener('click', () => {
     nextSequence()
@@ -109,22 +125,56 @@ topLeft.addEventListener('click', () => {
     // console.log(sequence)
 })
 
+// topLeft.inert = true
+
+
+// only for a button
+// startEl.disabled = true
 
 
 
 //Add a reset function... to reset the sequence when game mode is 'Simon',,,
+function resetSequence() {
+    if (currentGameMode === 'Simon') {
+        sequence = []
+        console.log(sequence)
+        //maybe I will need other things here.. like , turn start = false and buttons to be inert etc...
+    }else if (currentGameMode === 'Training'){
+        console.log('game mode is training, cannnot reset the sequence!')
+        console.log(sequence)
+    }
+}
 
 //Add a function to be activated each time the user clicks the right button after the sequence,, if the sequence size is === to finishCriteria then user has won the game
 function buttonPress(button) {
-    if (button === sequence[currentIndexToPress]){
 
-        if(currentIndexToPress === finishCriteria){
-            //set game as finished || user Won
+    // console.log('outside the for loop')
+
+    for (let index = 0; index <= currentIndexToPress; index++) {
+
+        console.log('index= ' + index)
+
+        if (button === sequence[index]) {
+
+            console.log('correct button')
+
+            if (currentIndexToPress === finishCriteria) {
+                //set game as finished || user Won
+                gameStart = false
+
+
+                topLeft.inert = true
+                topRight.inert = true
+                bottomLeft.inert = true
+                bottomRight.inert = true
+            }
+
+            currentIndexToPress++
+        } else {
+            //check game mode.. if = 'Simon' set game as finished.. gameover/user lost.. give user a way to start again without resetting Best Score
+            console.log('incorrect button')
+            resetSequence()
         }
-        currentIndexToPress++
-    }
-    else{
-        //check game mode.. if 'Simon' set game as finished.. gameover/user lost.. give user a way to start again without resetting Best Score
     }
 }
 
