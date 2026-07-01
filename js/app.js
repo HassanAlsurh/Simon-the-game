@@ -21,6 +21,8 @@ const BestScoreEl = document.querySelector('#bestScore')
 const startEl = document.querySelector('#start')
 
 
+
+
 /*----------------------------- Event Listeners -----------------------------*/
 
 topLeftEl.addEventListener('click', () => {
@@ -146,18 +148,22 @@ function assignClickClass() {
 
                 if (sequence[i] === 0) {
                     topLeftEl.id = 'active'
+                    playSound('Assets_Audio_A7')
                     setTimeout(() => { topLeftEl.id = '' }, timeOut)
                     
                 } else if (sequence[i] === 1) {
                     topRightEl.id = 'active'
+                    playSound('Assets_Audio_C2')
                     setTimeout(() => { topRightEl.id = '' }, timeOut)
                     
                 } else if (sequence[i] === 2) {
                     bottomLeftEl.id = 'active'
+                    playSound('Assets_Audio_D7')
                     setTimeout(() => { bottomLeftEl.id = '' }, timeOut)
                     
                 } else if (sequence[i] === 3) {
                     bottomRightEl.id = 'active'
+                    playSound('Assets_Audio_G2')
                     setTimeout(() => { bottomRightEl.id = '' }, timeOut)
                     
                 } else {
@@ -275,6 +281,14 @@ function buttonPress() {
     }
     userInput = []
 }
+}
+
+
+
+const playSound = (toPlay) => {
+    const audioElement = new Audio(`../assets/audio/${toPlay}.ogg`)
+    audioElement.volume = 1.0
+    audioElement.play()
 }
 
 
