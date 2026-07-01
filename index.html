@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/app.js" defer></script>
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
-
 </head>
 
 <body>
@@ -62,7 +61,6 @@
         </div>
 
         <br />
-        <br />
 
         <div id="Simon-circle">
 
@@ -76,19 +74,20 @@
                 <div class="circle bottom-right"></div>
             </div>
 
+            <div id="centre-circle">
+                <span id="Title">Simon</span>
+                <button type="button" id="start">START</button>
+            </div>
+
+            <div id="popup" class="popupStyle">
+                <img id="youLoseImg" src="assets/images/GameOver.png" alt="You lose, Gameover">
+                <img id="youWinImg" src="assets/images/YouWon.png" alt="You won the game, Congrats">
+                <p id="gameStatusParagraph"></p>
+                <button type="button" id="resetGame">Restart</button>
+            </div>
         </div>
 
-        <div id="centre-circle">
-            <span id="Title">Simon</span>
-            <button type="button" id="start">START</button>
-        </div>
 
-        <div id="popup" class="popupStyle">
-            <img id="youLoseImg" src="assets/images/GameOver.png" alt="You lose, Gameover">
-            <img id="youWinImg" src="assets/images/YouWon.png" alt="You won the game, Congrats">
-            <p id="gameStatusParagraph">Oops! looks like you pressed teh wrong button</p>
-            <button type="button" id="resetGame">Restart</button>
-        </div>
     </div>
 
 </body>

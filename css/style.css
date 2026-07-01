@@ -33,7 +33,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-
     background-color: white;
     border-radius: 20px;
     border: black solid 2px;
@@ -41,6 +40,9 @@ body {
 
 #popup {
     display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #popup p {
@@ -98,6 +100,7 @@ a {
 }
 
 #Simon-circle {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -141,7 +144,9 @@ a {
     position: absolute;
     width: 150px;
     height: 150px;
-    top: 290px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: rgb(255, 255, 255);
     border-radius: 100%;
 
@@ -174,7 +179,7 @@ a {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
 }
 
 #stats {
@@ -186,24 +191,26 @@ a {
 
 .currentScoreCard {
     width: 200px;
-    height: 50px;
+    height: 40px;
     background-color: #2196F3;
     text-align: center;
     border-radius: 14px;
     display: flex;
     justify-content: center;
     align-items: center;
+    border: darkgray 2px solid;
 }
 
 .bestScoreCard {
     width: 200px;
-    height: 50px;
+    height: 40px;
     background-color: #2196F3;
     text-align: center;
     border-radius: 14px;
     display: flex;
     justify-content: center;
     align-items: center;
+    border: darkgray 2px solid;
 }
 
 #help {
@@ -217,7 +224,6 @@ a {
 #extra {
     display: flex;
     flex-direction: row;
-    /* gap: 95px; */
     justify-content: space-between;
 }
 
@@ -273,20 +279,6 @@ a {
     box-shadow: inset 0px 4px 15px 0px rgb(245, 245, 245);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-/* Toggle Switch (from W3School)*/
-
-/* The switch - the box around the slider */
 .switch {
     position: relative;
     display: inline-block;
@@ -294,15 +286,12 @@ a {
     height: 25px;
 }
 
-
-/* Hide default HTML checkbox */
 .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-/* The slider */
 .slider {
     position: absolute;
     cursor: pointer;
@@ -341,7 +330,6 @@ input:checked+.slider:before {
     transform: translateX(20px);
 }
 
-/* Rounded sliders */
 .slider.round {
     border-radius: 14px;
 }
@@ -349,5 +337,3 @@ input:checked+.slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
-
-/* End of toggle styling */

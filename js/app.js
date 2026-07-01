@@ -47,6 +47,9 @@ bottomRightEl.addEventListener('click', () => {
 resetbuttonEl.addEventListener('click', () => {
     sequence = []
     userInput = []
+    currentScore = 0
+    currentIndexToPress = 0
+    currentScoreEl.textContent = 'Current Score: 0'
     popupEl.style.display = 'none'
     startEl.textContent = 'START'
 })
@@ -125,12 +128,6 @@ startEl.addEventListener('click', () => {
 }
 )
 
-const playSound = (toPlay) => {
-    const audioElement = new Audio(`assets/audio/${toPlay}`)
-    audioElement.volume = 1.0
-    audioElement.play()
-}
-
 topLeftEl.inert = true
 topRightEl.inert = true
 bottomLeftEl.inert = true
@@ -146,7 +143,6 @@ function setcurrentScore() {
 }
 
 function assignClickClass() {
-
     if (i >= sequence.length) {
         i = 0
         topLeftEl.inert = false
@@ -159,34 +155,31 @@ function assignClickClass() {
             topLeftEl.id = 'active'
             playSound('A7.mp3')
             setTimeout(() => { topLeftEl.id = '' }, timeOut)
-
         } else if (sequence[i] === 1) {
             topRightEl.id = 'active'
             playSound('C2.mp3')
             setTimeout(() => { topRightEl.id = '' }, timeOut)
-
         } else if (sequence[i] === 2) {
             bottomLeftEl.id = 'active'
             playSound('D7.mp3')
             setTimeout(() => { bottomLeftEl.id = '' }, timeOut)
-
         } else if (sequence[i] === 3) {
             bottomRightEl.id = 'active'
             playSound('G2.mp3')
             setTimeout(() => { bottomRightEl.id = '' }, timeOut)
-
         } else {
             i = 0
+            topLeftEl.inert = false
+            topRightEl.inert = false
+            bottomLeftEl.inert = false
+            bottomRightEl.inert = false
             return
         }
-
         i++
         setTimeout(() => {
             assignClickClass()
         }, timeOut + 100)
-
     }
-
 }
 
 function nextSequence() {
@@ -207,11 +200,6 @@ function resetSequence() {
         startEl.textContent = 'OFF'
         userInput = []
         currentIndexToPress = 0
-
-
-    } else if (currentGameMode === 'Training') {
-
-
     }
 }
 
@@ -264,4 +252,10 @@ function buttonPress() {
         }
         userInput = []
     }
+}
+
+const playSound = (toPlay) => {
+    const audioElement = new Audio(`./assets/audio/${toPlay}`)
+    audioElement.volume = 1.0
+    audioElement.play()
 }

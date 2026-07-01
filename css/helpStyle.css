@@ -28,9 +28,7 @@
  a {
      color: black;
      border-radius: 8px;
-     border-color: black;
-     border: 1px;
-     border-style: solid;
+     border: 1px solid;
      padding: 2px 5px;
      background-color: burlywood;
      text-decoration: none;
