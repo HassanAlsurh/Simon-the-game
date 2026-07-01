@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Life+Savers:wght@400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
 body {
     padding-top: 25px;
     display: flex;
@@ -5,6 +8,17 @@ body {
     align-items: center;
     margin: 0;
     background-color: lightgray;
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#Title {
+    font-family: "Life Savers", serif;
+    font-optical-sizing: auto;
+    font-size: xx-large;
+    font-weight: 900;
 }
 
 #difficulty {
@@ -176,6 +190,9 @@ a {
     background-color: #2196F3;
     text-align: center;
     border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .bestScoreCard {
@@ -184,6 +201,9 @@ a {
     background-color: #2196F3;
     text-align: center;
     border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #help {

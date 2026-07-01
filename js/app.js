@@ -127,7 +127,7 @@ startEl.addEventListener('click', () => {
 )
 
 const playSound = (toPlay) => {
-    const audioElement = new Audio(`../assets/Audio/${toPlay}`)
+    const audioElement = new Audio(`assets/Audio/${toPlay}`)
     audioElement.volume = 1.0
     audioElement.play()
 }
