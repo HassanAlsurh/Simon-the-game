@@ -1,6 +1,6 @@
 let finishCriteria = 5
-let sequence = []
-let userInput = []
+let sequences = []
+let userInputs = []
 let currentGameMode = 'Simon'
 let gameStart = false
 let currentScore = 0
@@ -26,27 +26,27 @@ const resetbuttonEl = document.querySelector('#resetGame')
 
 topLeftEl.addEventListener('click', () => {
     playSound('A7.mp3')
-    userInput.push(0)
+    userInputs.push(0)
     buttonPress()
 })
 topRightEl.addEventListener('click', () => {
     playSound('C2.mp3')
-    userInput.push(1)
+    userInputs.push(1)
     buttonPress()
 })
 bottomLeftEl.addEventListener('click', () => {
     playSound('D7.mp3')
-    userInput.push(2)
+    userInputs.push(2)
     buttonPress()
 })
 bottomRightEl.addEventListener('click', () => {
     playSound('G2.mp3')
-    userInput.push(3)
+    userInputs.push(3)
     buttonPress()
 })
 resetbuttonEl.addEventListener('click', () => {
-    sequence = []
-    userInput = []
+    sequencess = []
+    userInputs = []
     currentScore = 0
     currentIndexToPress = 0
     currentScoreEl.textContent = 'Current Score: 0'
@@ -95,7 +95,7 @@ startEl.addEventListener('click', () => {
             bottomRightEl.inert = true
         }
         else if (cond === 2) {
-            if (sequence.length === 0) {
+            if (sequences.length === 0) {
                 gameStart = true
                 nextSequence()
                 startEl.classList = 'active'
@@ -134,7 +134,7 @@ bottomLeftEl.inert = true
 bottomRightEl.inert = true
 
 function setcurrentScore() {
-    currentScore = sequence.length
+    currentScore = sequences.length
     currentScoreEl.textContent = `Current Score: ${currentScore}`
     if (currentScore > bestScore) {
         bestScore = currentScore
@@ -143,7 +143,7 @@ function setcurrentScore() {
 }
 
 function assignClickClass() {
-    if (i >= sequence.length) {
+    if (i >= sequences.length) {
         i = 0
         topLeftEl.inert = false
         topRightEl.inert = false
@@ -151,19 +151,19 @@ function assignClickClass() {
         bottomRightEl.inert = false
         return
     } else {
-        if (sequence[i] === 0) {
+        if (sequences[i] === 0) {
             topLeftEl.id = 'active'
             playSound('A7.mp3')
             setTimeout(() => { topLeftEl.id = '' }, timeOut)
-        } else if (sequence[i] === 1) {
+        } else if (sequences[i] === 1) {
             topRightEl.id = 'active'
             playSound('C2.mp3')
             setTimeout(() => { topRightEl.id = '' }, timeOut)
-        } else if (sequence[i] === 2) {
+        } else if (sequences[i] === 2) {
             bottomLeftEl.id = 'active'
             playSound('D7.mp3')
             setTimeout(() => { bottomLeftEl.id = '' }, timeOut)
-        } else if (sequence[i] === 3) {
+        } else if (sequences[i] === 3) {
             bottomRightEl.id = 'active'
             playSound('G2.mp3')
             setTimeout(() => { bottomRightEl.id = '' }, timeOut)
@@ -183,13 +183,13 @@ function assignClickClass() {
 }
 
 function nextSequence() {
-    sequence.push(Math.floor(Math.random() * 4))
+    sequences.push(Math.floor(Math.random() * 4))
     assignClickClass()
 }
 
 function resetSequence() {
     if (currentGameMode === 'Simon') {
-        sequence = []
+        sequences = []
         currentScore = 0
         topLeftEl.inert = true
         topRightEl.inert = true
@@ -198,16 +198,16 @@ function resetSequence() {
         startEl.classList = ''
         gameStart = false
         startEl.textContent = 'OFF'
-        userInput = []
+        userInputs = []
         currentIndexToPress = 0
     }
 }
 
 function buttonPress() {
     let statusFailed = false
-    if (userInput.length === sequence.length) {
-        for (let index = 0; index < userInput.length; index++) {
-            if (parseInt(userInput[index]) === parseInt(sequence[index])) {
+    if (userInputs.length === sequences.length) {
+        for (let index = 0; index < userInputs.length; index++) {
+            if (parseInt(userInputs[index]) === parseInt(sequences[index])) {
             } else {
                 if (currentGameMode === 'Simon') {
                     let lastscore = currentScore
@@ -220,7 +220,7 @@ function buttonPress() {
                     popupEl.style.display = 'flex'
                 } else if (currentGameMode === 'Training') {
                     playSound('Lose.mp3')
-                    userInput = []
+                    userInputs = []
                     assignClickClass()
                     return
                 }
@@ -250,7 +250,7 @@ function buttonPress() {
                 nextSequence()
             }, 1000)
         }
-        userInput = []
+        userInputs = []
     }
 }
 

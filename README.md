@@ -10,6 +10,11 @@ _Simon is a game of memory, where the player memorizes the pattern shown using a
 ### Play The Game
 [Deployed Game](https://hassanalsurh.github.io/Simon-the-game/)
 
+[Planning Material](./plan/)
+
+[Planning Material](https://github.com/HassanAlsurh/Simon-the-game/tree/16c5d046e5ed6714548917a75163da104d6fd42f/plan)
+
+
 ### How To Play
 1. Load the deployed game
 2. Press START
@@ -31,6 +36,14 @@ open index.html
 - HTML
 - CSS
 - JavaScript
+
+### Assets Used
+- [Simon buttons sounds](https://github.com/CForler-Git/Simon-Sounds/tree/master)
+- [Win/Lose soundeffects](https://pixabay.com/)
+- [Design and prototype](https://excalidraw.com/)
+- [Fonts](https://fonts.google.com/)
+- [JS logic](https://developer.mozilla.org/en-US/)
+- [Image editing](https://www.pixelcut.ai/)
 
 ### Future Enhancements
 1. Responsive design
