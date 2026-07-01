@@ -42,4 +42,4 @@ open index.html
 4. Arrow keys as a backup way to press teh buttons
 
 ### Credits
-This project was not possible without the help and support of my instructor in GA, Ms. **Nabila** and the Instructor Associates, IA **Zainab** and IA **Bidoor**.
+This project would've not been possible without the help and support of my instructor in GA, Ms. **Nabila** and the Instructor Associates, Ms. **Zainab** and Ms. **Bidoor**.

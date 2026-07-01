@@ -29,9 +29,17 @@
 
                 </div>
 
+                <div id="difficulty-setting">
+                    <label for="difficulty">Difficulty: </label>
+                    <select id="difficulty" name="difficulty">
+                        <option value="easy" selected>Easy</option>
+                        <option value="normal" >Normal</option>
+                        <option value="unlimited">Unlimited</option>
+                    </select>
+                </div>
+
                 <a href="help.html">
                     <div id="help">
-                        <!-- Help button (Expain the game)-->
                         <span>Help</span>
                         <img id="helpImg" src="assets/images/questionMark.png" alt="Need help?">
                     </div>
@@ -73,7 +81,6 @@
         <div id="centre-circle">
             <span id="Title">Simon</span>
             <button type="button" id="start">START</button>
-            <span id="gameStatus"></span>
         </div>
 
         <div id="popup" class="popupStyle">

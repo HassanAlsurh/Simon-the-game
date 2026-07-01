@@ -1,6 +1,4 @@
-/*-------------------------------- Constants --------------------------------*/
-const finishCriteria = 5
-/*-------------------------------- Variables --------------------------------*/
+let finishCriteria = 5
 let sequence = []
 let userInput = []
 let currentGameMode = 'Simon'
@@ -10,7 +8,6 @@ let bestScore = 0
 let currentIndexToPress = 0
 let timeOut = 1000
 let i = 0
-/*------------------------ Cached Element References ------------------------*/
 
 const topLeftEl = document.querySelector('.top-left')
 const topRightEl = document.querySelector('.top-right')
@@ -21,56 +18,38 @@ const currentScoreEl = document.querySelector('#currentScore')
 const BestScoreEl = document.querySelector('#bestScore')
 const startEl = document.querySelector('#start')
 const popupEl = document.querySelector('#popup')
-
+const diffSelectorEl = document.querySelector('#difficulty')
 const youWinImgEl = document.querySelector('#youWinImg')
 const youLoseImgEl = document.querySelector('#youLoseImg')
 const gameStatusParagraphEl = document.querySelector('#gameStatusParagraph')
 const resetbuttonEl = document.querySelector('#resetGame')
 
 
-
-/*----------------------------- Event Listeners -----------------------------*/
-
 topLeftEl.addEventListener('click', () => {
     playSound('Assets_Audio_A7')
-    // console.log('clicked topLeftEl')
     userInput.push(0)
     buttonPress()
-    // buttonPress(0)
 })
 topRightEl.addEventListener('click', () => {
     playSound('Assets_Audio_C2')
-    // console.log('clicked topRightEl')
     userInput.push(1)
     buttonPress()
-    // buttonPress(1)
 })
 bottomLeftEl.addEventListener('click', () => {
     playSound('Assets_Audio_D7')
-    // console.log('clicked bottomLeftEl')
     userInput.push(2)
     buttonPress()
-    // buttonPress(2)
 })
 bottomRightEl.addEventListener('click', () => {
     playSound('Assets_Audio_G2')
-    // console.log('clicked bottomRightEl')
     userInput.push(3)
     buttonPress()
-    // buttonPress(3)
 })
 resetbuttonEl.addEventListener('click', () => {
     sequence = []
     userInput = []
     popupEl.style.display = 'none'
-    // gameStart = true
     startEl.textContent = 'START'
-    // nextSequence()
-    // startEl.classList = 'active'
-    // topLeftEl.inert = false
-    // topRightEl.inert = false
-    // bottomLeftEl.inert = false
-    // bottomRightEl.inert = false
 })
 
 //Set game mode
@@ -80,6 +59,21 @@ gameModeEl.addEventListener('change', () => {
     } else {
         currentGameMode = 'Simon'
     }
+})
+
+diffSelectorEl.addEventListener('change', () => {
+    if (diffSelectorEl.value === 'easy') {
+        finishCriteria = 5
+        timeOut = 1000
+    } else if (diffSelectorEl.value === 'normal') {
+        finishCriteria = 25
+        timeOut = 800
+    } else if (diffSelectorEl.value === 'unlimited') {
+        finishCriteria = Infinity
+        timeOut = 500
+    }
+    console.log('.value ' + diffSelectorEl.value)
+    console.log('.textContent ' + diffSelectorEl.textContent)
 })
 
 startEl.addEventListener('click', () => {
@@ -141,7 +135,6 @@ startEl.addEventListener('click', () => {
     }
 }
 )
-/*-------------------------------- Functions --------------------------------*/
 
 const playSound = (toPlay) => {
     const audioElement = new Audio(`../assets/audio/${toPlay}.ogg`)
@@ -168,7 +161,6 @@ function setcurrentScore() {
 function assignClickClass() {
 
     if (i >= sequence.length) {
-        // console.log(' 1 sequence length: ' + sequence.length + '. i= ' + i)
         i = 0
         return
     } else {
@@ -193,21 +185,14 @@ function assignClickClass() {
             setTimeout(() => { bottomRightEl.id = '' }, timeOut)
 
         } else {
-            // console.log(' Something went wrong... sequence length: ' + sequence.length + '. i= ' + i)
             i = 0
             return
         }
 
-        // console.log('index to press: ' + currentIndexToPress + '. i= ' + i)
         i++
         setTimeout(() => {
             assignClickClass()
         }, timeOut + 100)
-
-        // console.log(' 3 sequence length: ' + sequence.length + '. i= ' + i)
-        // console.log('user needs to play: ' + (currentIndexToPress + 1))
-
-
 
     }
 
@@ -219,7 +204,6 @@ function nextSequence() {
     sequence.push(Math.floor(Math.random() * 4))
     console.log(sequence)
     assignClickClass()
-    // currentIndexToPress = 0 
 }
 
 
@@ -229,7 +213,6 @@ function resetSequence() {
         sequence = []
         console.log(sequence)
         currentScore = 0
-        //maybe I will need other things here.. like , turn start = false and buttons to be inert etc...
         topLeftEl.inert = true
         topRightEl.inert = true
         bottomLeftEl.inert = true
@@ -258,8 +241,6 @@ function buttonPress() {
             if (parseInt(userInput[index]) === parseInt(sequence[index])) {
                 console.log('correct button')
             } else {
-                // User pressed 
-                //check game mode.. if = 'Simon' set game as finished.. gameover/user lost.. give user a way to start again without resetting Best Score
                 console.log('incorrect button')
                 if (currentGameMode === 'Simon') {
                     let lastscore = currentScore
@@ -281,16 +262,12 @@ function buttonPress() {
                     assignClickClass()
                     return
                 }
-                //Show to user that the game ended because they entered wrong button..
-                //set startbutton to inactive.. buttons inert etc...
             }
         }
         if (currentIndexToPress === finishCriteria) {
-            //set game as finished || user Won
 
             // playSound('xxx')
-            //show the user that they won.. Popup
-            //set the  mid button to 'start'
+            
             youLoseImgEl.style.display = 'none'
             youWinImgEl.style.display = 'block'
             gameStatusParagraphEl.textContent = `Victory! Your memory is perfect. You reached the max score of ${currentScore}!`
@@ -305,8 +282,10 @@ function buttonPress() {
         }
         else if (!statusFailed) {
             setcurrentScore()
-            nextSequence()
             currentIndexToPress++
+            setTimeout(()=>{
+                nextSequence()
+            },1000)
         }
         userInput = []
     }
@@ -316,9 +295,3 @@ function buttonPress() {
 
 
 //function to update the current Score each time the user clicks the right button after the sequence /// and if the current Score is > than the Best score update the BEst score too.
-
-
-
-/*--------------------------------------------------------------------------------*/
-/*-------------------------------- Code GraveYard --------------------------------*/
-/*--------------------------------------------------------------------------------*/
