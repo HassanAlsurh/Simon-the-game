@@ -12,9 +12,6 @@ _Simon is a game of memory, where the player memorizes the pattern shown using a
 
 [Planning Material](./plan/)
 
-[Planning Material](https://github.com/HassanAlsurh/Simon-the-game/tree/16c5d046e5ed6714548917a75163da104d6fd42f/plan)
-
-
 ### How To Play
 1. Load the deployed game
 2. Press START
