@@ -20,6 +20,7 @@ const gameModeEl = document.querySelector('#gameMode')
 const currentScoreEl = document.querySelector('#currentScore')
 const BestScoreEl = document.querySelector('#bestScore')
 const startEl = document.querySelector('#start')
+const popupEl = document.querySelector('#popup')
 
 
 
@@ -65,6 +66,7 @@ gameModeEl.addEventListener('change', () => {
 })
 
 startEl.addEventListener('click', () => {
+    console.log('pressed')
 
     const localFunction = (cond) => {
 
@@ -109,15 +111,15 @@ startEl.addEventListener('click', () => {
         }
     }
 
-    if (startEl.textContent === 'Start') {
-        startEl.textContent = 'On'
+    if (startEl.textContent === 'START') {
+        startEl.textContent = 'ON'
         localFunction(0)
 
-    } else if (startEl.textContent === 'On') {
-        startEl.textContent = 'Off'
+    } else if (startEl.textContent === 'ON') {
+        startEl.textContent = 'OFF'
         localFunction(1)
-    } else if (startEl.textContent === 'Off') {
-        startEl.textContent = 'On'
+    } else if (startEl.textContent === 'OFF') {
+        startEl.textContent = 'ON'
         localFunction(2)
     }
 }
@@ -217,7 +219,7 @@ function resetSequence() {
         bottomRightEl.inert = true
         startEl.classList = ''
         gameStart = false
-        startEl.textContent = 'Off'
+        startEl.textContent = 'OFF'
         userInput = []
         currentIndexToPress = 0
 
@@ -247,6 +249,7 @@ function buttonPress() {
                     statusFailed = true
                     //play losing sound
                     // playSound('xxx')
+                    popupEl.style.display = 'block'
                     
                 } else if (currentGameMode === 'Training') {
                     
@@ -266,6 +269,8 @@ function buttonPress() {
             // playSound('xxx')
             //show the user that they won.. Popup
             //set the  mid button to 'start'
+            popupEl.style.display = 'block'
+
             gameStart = false
             startEl.classList = ''
             topLeftEl.inert = true

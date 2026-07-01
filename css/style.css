@@ -6,6 +6,9 @@ body {
 }
 
 #popup {
+    display: none;
+}
+.popupStyle {
     position: absolute;
     top: 30%;
     width: 40.5dvh;
