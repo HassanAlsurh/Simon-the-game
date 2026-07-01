@@ -11,23 +11,28 @@
 
 <body>
 
+
     <div id="top">
 
         <div id="extra">
 
             <div id="Training-toggle">
                 <span>Training</span>
+
                 <label class="switch">
                     <input type="checkbox" id="gameMode">
                     <span class="slider round"></span>
                 </label>
+
             </div>
 
-            <div id="help">
-                <!-- Help button (Expain the game)-->
-
-                <span>Help</span>
-            </div>
+            <a href="help.html">
+                <div id="help">
+                    <!-- Help button (Expain the game)-->
+                    <span>Help</span>
+                    <img id="helpImg" src="assets/images/questionMark.png" alt="Need help?">
+                </div>
+            </a>
 
         </div>
 
@@ -62,12 +67,18 @@
 
     </div>
 
-    <div id="centre-circle" >
-        <span id="Title" >Simon</span>
-        <button type="button" id="start" >Start</button>
+    <div id="centre-circle">
+        <span id="Title">Simon</span>
+        <button type="button" id="start">START</button>
         <span id="gameStatus"></span>
     </div>
 
+    <div id="popup">
+        <h2 id="gameStatus">Game Over</h2>
+        <img src="" alt="" srcset="">
+        <p id="gameStatusParagraph">Oops! looks like you pressed teh wrong button</p>
+        <button type="button" id="resetGame">Restart</button>
+    </div>
 </body>
 
 </html>

@@ -1,5 +1,5 @@
 /*-------------------------------- Constants --------------------------------*/
-const finishCriteria = 25
+const finishCriteria = 5
 /*-------------------------------- Variables --------------------------------*/
 let sequence = []
 let userInput = []
@@ -245,7 +245,13 @@ function buttonPress() {
                 if (currentGameMode === 'Simon') {
                     resetSequence()
                     statusFailed = true
+                    //play losing sound
+                    // playSound('xxx')
+                    
                 } else if (currentGameMode === 'Training') {
+                    
+                    // playSound('xxx')
+                    //play a sound indicating that a wrong button was pressed
                     userInput = []
                     assignClickClass()
                     return
@@ -256,6 +262,10 @@ function buttonPress() {
         }
         if (currentIndexToPress === finishCriteria) {
             //set game as finished || user Won
+            
+            // playSound('xxx')
+            //show the user that they won.. Popup
+            //set the  mid button to 'start'
             gameStart = false
             startEl.classList = ''
             topLeftEl.inert = true
