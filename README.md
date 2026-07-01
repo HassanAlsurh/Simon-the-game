@@ -1,23 +1,24 @@
 # Simon Says
 
-_A game where the player has to press buttons._
+_Simon is a game of memory, where the player memorizes the pattern shown using a disc with 4 different colored buttons, and then the player replays it as is._
 
 ![Preview of the game](assets/images/gamePreview.png)
 
 ---
 
-## Getting started
+## Getting Started
 
-### play the game
+### Play The Game
 [Deployed Game](https://hassanalsurh.github.io/Simon-the-game/)
 
-### How to play
+### How To Play
 Directions here
-1.
-2.
-3.
-4.
-etc
+1. load the deployed game
+2. Press START
+3. Press the buttons in the same sequenece that they light up
+4. Press the ON button to pause
+5. Press the OFF button to resume
+6. If you lose or win, press RESTART to restart the game
 
 ### Installations
 No Installation Required! simply clone the repo to your machine and open teh `index.html` file in your browser.
@@ -28,11 +29,18 @@ cd memory
 open index.html
 ```
 
-### TEchnologies used
+### Technologies Used
 - HTML
 - CSS
 - JavaScript
 
-### Future emahncements
+### Future Enahncements
+1. Responsive design
+2. Start page, including: 
+   1. Play
+   2. Settings
+   3. Credits
+3. Better UI
 
 ### Credits
+**Hasan Ali**
