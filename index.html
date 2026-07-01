@@ -11,74 +11,79 @@
 
 <body>
 
+    <div id="container">
 
-    <div id="top">
 
-        <div id="extra">
 
-            <div id="Training-toggle">
-                <span>Training</span>
+        <div id="top">
 
-                <label class="switch">
-                    <input type="checkbox" id="gameMode">
-                    <span class="slider round"></span>
-                </label>
+            <div id="extra">
 
-            </div>
+                <div id="Training-toggle">
+                    <span>Training</span>
 
-            <a href="help.html">
-                <div id="help">
-                    <!-- Help button (Expain the game)-->
-                    <span>Help</span>
-                    <img id="helpImg" src="assets/images/questionMark.png" alt="Need help?">
+                    <label class="switch">
+                        <input type="checkbox" id="gameMode">
+                        <span class="slider round"></span>
+                    </label>
+
                 </div>
-            </a>
 
-        </div>
+                <a href="help.html">
+                    <div id="help">
+                        <!-- Help button (Expain the game)-->
+                        <span>Help</span>
+                        <img id="helpImg" src="assets/images/questionMark.png" alt="Need help?">
+                    </div>
+                </a>
 
-        <div id="stats">
-
-            <div class="currentScoreCard">
-                <p id="currentScore">Current Score: 0</p>
             </div>
 
-            <div class="bestScoreCard">
-                <p id="bestScore">Best Score: 0</p>
+            <div id="stats">
+
+                <div class="currentScoreCard">
+                    <p id="currentScore">Current Score: 0</p>
+                </div>
+
+                <div class="bestScoreCard">
+                    <p id="bestScore">Best Score: 0</p>
+                </div>
+
             </div>
 
         </div>
 
-    </div>
+        <br />
+        <br />
 
-    <br />
-    <br />
+        <div id="Simon-circle">
 
-    <div id="Simon-circle">
+            <div class="top-semi-circle">
+                <div class="circle top-left"></div>
+                <div class="circle top-right"></div>
+            </div>
 
-        <div class="top-semi-circle">
-            <div class="circle top-left"></div>
-            <div class="circle top-right"></div>
+            <div class="bottom-semi-circle">
+                <div class="circle bottom-left"></div>
+                <div class="circle bottom-right"></div>
+            </div>
+
         </div>
 
-        <div class="bottom-semi-circle">
-            <div class="circle bottom-left"></div>
-            <div class="circle bottom-right"></div>
+        <div id="centre-circle">
+            <span id="Title">Simon</span>
+            <button type="button" id="start">START</button>
+            <span id="gameStatus"></span>
         </div>
 
+        <div id="popup" class="popupStyle">
+            <h2 id="gameStatus">Game Over</h2>
+            <img src="" alt="" srcset="">
+            <p id="gameStatusParagraph">Oops! looks like you pressed teh wrong button</p>
+            <button type="button" id="resetGame">Restart</button>
+        </div>
     </div>
 
-    <div id="centre-circle">
-        <span id="Title">Simon</span>
-        <button type="button" id="start">START</button>
-        <span id="gameStatus"></span>
-    </div>
-
-    <div id="popup" class="popupStyle">
-        <h2 id="gameStatus">Game Over</h2>
-        <img src="" alt="" srcset="">
-        <p id="gameStatusParagraph">Oops! looks like you pressed teh wrong button</p>
-        <button type="button" id="resetGame">Restart</button>
-    </div>
 </body>
 
 </html>

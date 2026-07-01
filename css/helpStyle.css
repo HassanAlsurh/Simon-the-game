@@ -1,0 +1,32 @@
+ body {
+     font-family: Arial, sans-serif;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     background-color: lightgray;
+     padding: 20px;
+ }
+
+ div {
+     background-color: white;
+     padding: 20px;
+     border: 2px solid black;
+     width: 500px;
+     border-radius: 20px;
+ }
+
+ h2 {
+     color: red;
+ }
+
+ a {
+     color: black;
+     border-radius: 8px;
+     border-color: black;
+     border: 1px;
+     border-style: solid;
+     padding: 2px 5px;
+     background-color: burlywood;
+     text-decoration: none;
+ }

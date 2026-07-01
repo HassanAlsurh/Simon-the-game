@@ -12,8 +12,7 @@ _Simon is a game of memory, where the player memorizes the pattern shown using a
 [Deployed Game](https://hassanalsurh.github.io/Simon-the-game/)
 
 ### How To Play
-Directions here
-1. load the deployed game
+1. Load the deployed game
 2. Press START
 3. Press the buttons in the same sequenece that they light up
 4. Press the ON button to pause
@@ -34,13 +33,14 @@ open index.html
 - CSS
 - JavaScript
 
-### Future Enahncements
+### Future Enhancements
 1. Responsive design
 2. Start page, including: 
    1. Play
    2. Settings
    3. Credits
 3. Better UI
+4. Arrow keys as a backup way to press teh buttons
 
 ### Credits
-**Hasan Ali**
+This project was not possible without the help and support of my instructor in GA, Ms. **Nabila** and the Instructor Associates, IA **Zainab** and IA **Bidoor**.
