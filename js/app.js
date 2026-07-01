@@ -9,6 +9,7 @@ let currentScore = 0
 let bestScore = 0
 let currentIndexToPress = 0
 let timeOut = 1000
+let i = 0
 /*------------------------ Cached Element References ------------------------*/
 
 const topLeftEl = document.querySelector('.top-left')
@@ -26,24 +27,28 @@ const startEl = document.querySelector('#start')
 /*----------------------------- Event Listeners -----------------------------*/
 
 topLeftEl.addEventListener('click', () => {
+    playSound('Assets_Audio_A7')
     // console.log('clicked topLeftEl')
     userInput.push(0)
     buttonPress()
     // buttonPress(0)
 })
 topRightEl.addEventListener('click', () => {
+    playSound('Assets_Audio_C2')
     // console.log('clicked topRightEl')
     userInput.push(1)
     buttonPress()
     // buttonPress(1)
 })
 bottomLeftEl.addEventListener('click', () => {
+    playSound('Assets_Audio_D7')
     // console.log('clicked bottomLeftEl')
     userInput.push(2)
     buttonPress()
     // buttonPress(2)
 })
 bottomRightEl.addEventListener('click', () => {
+    playSound('Assets_Audio_G2')
     // console.log('clicked bottomRightEl')
     userInput.push(3)
     buttonPress()
@@ -64,22 +69,22 @@ startEl.addEventListener('click', () => {
     const localFunction = (cond) => {
 
         if (cond === 0) {
-        gameStart = true
-        nextSequence()
-        startEl.classList = 'active'
-        topLeftEl.inert = false
-        topRightEl.inert = false
-        bottomLeftEl.inert = false
-        bottomRightEl.inert = false
-        } 
+            gameStart = true
+            nextSequence()
+            startEl.classList = 'active'
+            topLeftEl.inert = false
+            topRightEl.inert = false
+            bottomLeftEl.inert = false
+            bottomRightEl.inert = false
+        }
         else if (cond === 1) {
-        gameStart = false
-        startEl.classList = ''
-        topLeftEl.inert = true
-        topRightEl.inert = true
-        bottomLeftEl.inert = true
-        bottomRightEl.inert = true
-        }       
+            gameStart = false
+            startEl.classList = ''
+            topLeftEl.inert = true
+            topRightEl.inert = true
+            bottomLeftEl.inert = true
+            bottomRightEl.inert = true
+        }
         else if (cond === 2) {
 
             if (sequence.length === 0) {
@@ -90,7 +95,7 @@ startEl.addEventListener('click', () => {
                 topRightEl.inert = false
                 bottomLeftEl.inert = false
                 bottomRightEl.inert = false
-            }else{
+            } else {
                 i = 0
                 assignClickClass()
                 gameStart = true
@@ -101,23 +106,29 @@ startEl.addEventListener('click', () => {
                 bottomRightEl.inert = false
             }
 
-        }       
+        }
     }
-    
-    if (startEl.textContent === 'Start' ) {
+
+    if (startEl.textContent === 'Start') {
         startEl.textContent = 'On'
         localFunction(0)
 
     } else if (startEl.textContent === 'On') {
         startEl.textContent = 'Off'
         localFunction(1)
-    }else if ( startEl.textContent === 'Off'){
+    } else if (startEl.textContent === 'Off') {
         startEl.textContent = 'On'
         localFunction(2)
     }
 }
 )
 /*-------------------------------- Functions --------------------------------*/
+
+const playSound = (toPlay) => {
+    const audioElement = new Audio(`../assets/audio/${toPlay}.ogg`)
+    audioElement.volume = 1.0
+    audioElement.play()
+}
 
 topLeftEl.inert = true
 topRightEl.inert = true
@@ -135,56 +146,52 @@ function setcurrentScore() {
 
 
 
-let i = 0
 function assignClickClass() {
-        
-        if (i >= sequence.length) {
-            // console.log(' 1 sequence length: ' + sequence.length + '. i= ' + i)
+
+    if (i >= sequence.length) {
+        // console.log(' 1 sequence length: ' + sequence.length + '. i= ' + i)
+        i = 0
+        return
+    } else {
+        if (sequence[i] === 0) {
+            topLeftEl.id = 'active'
+            playSound('Assets_Audio_A7')
+            setTimeout(() => { topLeftEl.id = '' }, timeOut)
+
+        } else if (sequence[i] === 1) {
+            topRightEl.id = 'active'
+            playSound('Assets_Audio_C2')
+            setTimeout(() => { topRightEl.id = '' }, timeOut)
+
+        } else if (sequence[i] === 2) {
+            bottomLeftEl.id = 'active'
+            playSound('Assets_Audio_D7')
+            setTimeout(() => { bottomLeftEl.id = '' }, timeOut)
+
+        } else if (sequence[i] === 3) {
+            bottomRightEl.id = 'active'
+            playSound('Assets_Audio_G2')
+            setTimeout(() => { bottomRightEl.id = '' }, timeOut)
+
+        } else {
+            // console.log(' Something went wrong... sequence length: ' + sequence.length + '. i= ' + i)
             i = 0
             return
-        } else {
-            
-            
-
-                if (sequence[i] === 0) {
-                    topLeftEl.id = 'active'
-                    playSound('Assets_Audio_A7')
-                    setTimeout(() => { topLeftEl.id = '' }, timeOut)
-                    
-                } else if (sequence[i] === 1) {
-                    topRightEl.id = 'active'
-                    playSound('Assets_Audio_C2')
-                    setTimeout(() => { topRightEl.id = '' }, timeOut)
-                    
-                } else if (sequence[i] === 2) {
-                    bottomLeftEl.id = 'active'
-                    playSound('Assets_Audio_D7')
-                    setTimeout(() => { bottomLeftEl.id = '' }, timeOut)
-                    
-                } else if (sequence[i] === 3) {
-                    bottomRightEl.id = 'active'
-                    playSound('Assets_Audio_G2')
-                    setTimeout(() => { bottomRightEl.id = '' }, timeOut)
-                    
-                } else {
-                    // console.log(' Something went wrong... sequence length: ' + sequence.length + '. i= ' + i)
-                    i = 0
-                    return
-                }
-                
-                console.log('index to press: ' + currentIndexToPress+ '. i= ' + i)
-                i++
-                setTimeout(() => { 
-                    assignClickClass()
-                }, timeOut+100)
-                
-                // console.log(' 3 sequence length: ' + sequence.length + '. i= ' + i)
-                console.log('user needs to play: ' + (currentIndexToPress+1))
-
-            
-            
         }
-        
+
+        // console.log('index to press: ' + currentIndexToPress + '. i= ' + i)
+        i++
+        setTimeout(() => {
+            assignClickClass()
+        }, timeOut + 100)
+
+        // console.log(' 3 sequence length: ' + sequence.length + '. i= ' + i)
+        // console.log('user needs to play: ' + (currentIndexToPress + 1))
+
+
+
+    }
+
 }
 
 
@@ -213,83 +220,59 @@ function resetSequence() {
         startEl.textContent = 'Off'
         userInput = []
         currentIndexToPress = 0
-        
-        
+
+
     } else if (currentGameMode === 'Training') {
         console.log('game mode is training, cannnot reset the sequence!')
         console.log(sequence)
-        
+
     }
 }
 
 //Add a function to be activated each time the user clicks the right button after the sequence,, if the sequence size is === to finishCriteria then user has won the game
 function buttonPress() {
-    
     let statusFailed = false
-    // console.log('outside the for loop')
-    
-    console.log('userinput: '+userInput)
-    
-    if ( userInput.length === sequence.length){
-        
-        
-        for (let index = 0; index < userInput.length ; index++) {
-            
-        console.log('index= ' + index + '... current sequence: '+ sequence[index]+ ' ... user pressed: '+ userInput[index])
-        
-        if ( parseInt(userInput[index])  === parseInt(sequence[index])) {
-            
-            console.log('correct button')
-            
-            
-            
-        } else {
-            // User pressed 
-            //check game mode.. if = 'Simon' set game as finished.. gameover/user lost.. give user a way to start again without resetting Best Score
-            console.log('incorrect button')
-            
-            if (currentGameMode === 'Simon'){
-                resetSequence()
-                statusFailed = true
-            }else if (currentGameMode === 'Training'){
-                userInput = []
-                assignClickClass()
-                return
+    console.log('userinput: ' + userInput)
+    if (userInput.length === sequence.length) {
+        for (let index = 0; index < userInput.length; index++) {
+            console.log('index= ' + index + '... current sequence: ' + sequence[index] + ' ... user pressed: ' + userInput[index])
+            if (parseInt(userInput[index]) === parseInt(sequence[index])) {
+                console.log('correct button')
+            } else {
+                // User pressed 
+                //check game mode.. if = 'Simon' set game as finished.. gameover/user lost.. give user a way to start again without resetting Best Score
+                console.log('incorrect button')
+                if (currentGameMode === 'Simon') {
+                    resetSequence()
+                    statusFailed = true
+                } else if (currentGameMode === 'Training') {
+                    userInput = []
+                    assignClickClass()
+                    return
+                }
+                //Show to user that the game ended because they entered wrong button..
+                //set startbutton to inactive.. buttons inert etc...
             }
-            
-            //Show to user that the game ended because they entered wrong button..
-            //set startbutton to inactive.. buttons inert etc...
         }
+        if (currentIndexToPress === finishCriteria) {
+            //set game as finished || user Won
+            gameStart = false
+            startEl.classList = ''
+            topLeftEl.inert = true
+            topRightEl.inert = true
+            bottomLeftEl.inert = true
+            bottomRightEl.inert = true
+        }
+        else if (!statusFailed) {
+            setcurrentScore()
+            nextSequence()
+            currentIndexToPress++
+        }
+        userInput = []
     }
-    
-    if (currentIndexToPress === finishCriteria) {
-        //set game as finished || user Won
-        gameStart = false
-        
-        startEl.classList = ''
-        
-        topLeftEl.inert = true
-        topRightEl.inert = true
-        bottomLeftEl.inert = true
-        bottomRightEl.inert = true
-        
-    }
-    else if (!statusFailed) {
-        setcurrentScore()
-        nextSequence()
-        currentIndexToPress++
-    }
-    userInput = []
-}
 }
 
 
-
-const playSound = (toPlay) => {
-    const audioElement = new Audio(`../assets/audio/${toPlay}.ogg`)
-    audioElement.volume = 1.0
-    audioElement.play()
-}
 
 
 //function to update the current Score each time the user clicks the right button after the sequence /// and if the current Score is > than the Best score update the BEst score too.
@@ -299,79 +282,3 @@ const playSound = (toPlay) => {
 /*--------------------------------------------------------------------------------*/
 /*-------------------------------- Code GraveYard --------------------------------*/
 /*--------------------------------------------------------------------------------*/
-
-// only for a button
-// startEl.disabled = true
-//works for other things
-// topLeftEl.inert = true
-
-// //for testing
-// topLeftEl.addEventListener('click', () => {
-    //     nextSequence()
-    //     setcurrentScore()
-    //     // console.log(sequence)
-    // })
-    
-
-    
-    // //Add a function to be activated each time the user clicks the right button after the sequence,, if the sequence size is === to finishCriteria then user has won the game
-    // function buttonPress(button) {
-        
-    //     // console.log('outside the for loop')
-    
-    //     for (let index = 0; index <= currentIndexToPress; index++) {
-        
-    //         console.log('index= ' + index + '... current sequence: '+ sequence[index]+ ' ... user pressed: '+ button)
-    
-    //         if ( parseInt(button)  === parseInt(sequence[index])) {
-        
-    //             console.log('correct button')
-    
-    //             if (currentIndexToPress === finishCriteria) {
-        //                 //set game as finished || user Won
-        //                 gameStart = false
-        
-        //                 startEl.classList = ''
-        
-        //                 topLeftEl.inert = true
-        //                 topRightEl.inert = true
-        //                 bottomLeftEl.inert = true
-        //                 bottomRightEl.inert = true
-        
-        //             }
-        
-        //             nextSequence()
-        
-        //         } else {
-            //             // User pressed 
-            //             //check game mode.. if = 'Simon' set game as finished.. gameover/user lost.. give user a way to start again without resetting Best Score
-            //             console.log('incorrect button')
-            //             resetSequence()
-            
-            
-            //             //maybe the following needs to be in teh reset function
-            //             //Show to user that the game ended because they entered wrong button..
-            //             //set startbutton to inactive.. buttons inert etc...
-            //         }
-            //     }
-            // }
-            
-
-
-            
-                // if (!gameStart) {
-                //     gameStart = true
-                //     nextSequence()
-                //     startEl.classList = 'active'
-                //     topLeftEl.inert = false
-                //     topRightEl.inert = false
-                //     bottomLeftEl.inert = false
-                //     bottomRightEl.inert = false
-                // } else {
-                //     gameStart = false
-                //     startEl.classList = ''
-                //     topLeftEl.inert = true
-                //     topRightEl.inert = true
-                //     bottomLeftEl.inert = true
-                //     bottomRightEl.inert = true
-                // }
