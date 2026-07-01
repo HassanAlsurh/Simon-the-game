@@ -22,13 +22,36 @@ body {
     display: none;
 }
 
+#popup p {
+    padding: 0 40px;
+}
+
+#popup img {
+    width: 150px;
+}
+
+#youWinImg {
+    display: none;
+}
+
+#youLoseImg {
+    display: none;
+}
+
+#resetGame {
+    margin-top: auto;
+    margin-bottom: 30px;
+    background-color: burlywood;
+}
+
 .popupStyle {
     position: absolute;
-    top: 30%;
+    top: 17%;
     width: 40.5dvh;
     height: 40.5dvh;
-    background-color: rgba(255, 255, 255, 0.95);
-    border-radius: 18px;
+    background-color: rgba(141, 141, 141, 0.969);
+    border-radius: 20px;
+    border: black solid 2px;
 
     display: flex;
     flex-direction: column;

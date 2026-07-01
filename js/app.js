@@ -22,6 +22,10 @@ const BestScoreEl = document.querySelector('#bestScore')
 const startEl = document.querySelector('#start')
 const popupEl = document.querySelector('#popup')
 
+const youWinImgEl = document.querySelector('#youWinImg')
+const youLoseImgEl = document.querySelector('#youLoseImg')
+const gameStatusParagraphEl = document.querySelector('#gameStatusParagraph')
+const resetbuttonEl = document.querySelector('#resetGame')
 
 
 
@@ -54,6 +58,19 @@ bottomRightEl.addEventListener('click', () => {
     userInput.push(3)
     buttonPress()
     // buttonPress(3)
+})
+resetbuttonEl.addEventListener('click', () => {
+    sequence = []
+    userInput = []
+    popupEl.style.display = 'none'
+    // gameStart = true
+    startEl.textContent = 'START'
+    // nextSequence()
+    // startEl.classList = 'active'
+    // topLeftEl.inert = false
+    // topRightEl.inert = false
+    // bottomLeftEl.inert = false
+    // bottomRightEl.inert = false
 })
 
 //Set game mode
@@ -245,14 +262,19 @@ function buttonPress() {
                 //check game mode.. if = 'Simon' set game as finished.. gameover/user lost.. give user a way to start again without resetting Best Score
                 console.log('incorrect button')
                 if (currentGameMode === 'Simon') {
+                    let lastscore = currentScore
                     resetSequence()
+                    youLoseImgEl.style.display = 'block'
+                    youWinImgEl.style.display = 'none'
+                    gameStatusParagraphEl.textContent = `Game Over! Your final score was ${lastscore}. Click Restart to play again.`
                     statusFailed = true
+                    popupEl.style.display = 'flex'
                     //play losing sound
                     // playSound('xxx')
-                    popupEl.style.display = 'block'
-                    
+
+
                 } else if (currentGameMode === 'Training') {
-                    
+
                     // playSound('xxx')
                     //play a sound indicating that a wrong button was pressed
                     userInput = []
@@ -265,11 +287,14 @@ function buttonPress() {
         }
         if (currentIndexToPress === finishCriteria) {
             //set game as finished || user Won
-            
+
             // playSound('xxx')
             //show the user that they won.. Popup
             //set the  mid button to 'start'
-            popupEl.style.display = 'block'
+            youLoseImgEl.style.display = 'none'
+            youWinImgEl.style.display = 'block'
+            gameStatusParagraphEl.textContent = `Victory! Your memory is perfect. You reached the max score of ${currentScore}!`
+            popupEl.style.display = 'flex'
 
             gameStart = false
             startEl.classList = ''

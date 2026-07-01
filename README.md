@@ -3,7 +3,6 @@
 _Simon is a game of memory, where the player memorizes the pattern shown using a disc with 4 different colored buttons, and then the player replays it as is._
 
 ![Preview of the game](assets/images/gamePreview.png)
-
 ---
 
 ## Getting Started
