@@ -25,22 +25,22 @@ const gameStatusParagraphEl = document.querySelector('#gameStatusParagraph')
 const resetbuttonEl = document.querySelector('#resetGame')
 
 topLeftEl.addEventListener('click', () => {
-    playSound('Assets_Audio_A7.ogg')
+    playSound('A7.mp3')
     userInput.push(0)
     buttonPress()
 })
 topRightEl.addEventListener('click', () => {
-    playSound('Assets_Audio_C2.ogg')
+    playSound('C2.mp3')
     userInput.push(1)
     buttonPress()
 })
 bottomLeftEl.addEventListener('click', () => {
-    playSound('Assets_Audio_D7.ogg')
+    playSound('D7.mp3')
     userInput.push(2)
     buttonPress()
 })
 bottomRightEl.addEventListener('click', () => {
-    playSound('Assets_Audio_G2.ogg')
+    playSound('G2.mp3')
     userInput.push(3)
     buttonPress()
 })
@@ -73,7 +73,6 @@ diffSelectorEl.addEventListener('change', () => {
 })
 
 startEl.addEventListener('click', () => {
-    console.log('pressed')
     const localFunction = (cond) => {
         if (cond === 0) {
             gameStart = true
@@ -127,7 +126,7 @@ startEl.addEventListener('click', () => {
 )
 
 const playSound = (toPlay) => {
-    const audioElement = new Audio(`assets/Audio/${toPlay}`)
+    const audioElement = new Audio(`assets/audio/${toPlay}`)
     audioElement.volume = 1.0
     audioElement.play()
 }
@@ -158,22 +157,22 @@ function assignClickClass() {
     } else {
         if (sequence[i] === 0) {
             topLeftEl.id = 'active'
-            playSound('Assets_Audio_A7.ogg')
+            playSound('A7.mp3')
             setTimeout(() => { topLeftEl.id = '' }, timeOut)
 
         } else if (sequence[i] === 1) {
             topRightEl.id = 'active'
-            playSound('Assets_Audio_C2.ogg')
+            playSound('C2.mp3')
             setTimeout(() => { topRightEl.id = '' }, timeOut)
 
         } else if (sequence[i] === 2) {
             bottomLeftEl.id = 'active'
-            playSound('Assets_Audio_D7.ogg')
+            playSound('D7.mp3')
             setTimeout(() => { bottomLeftEl.id = '' }, timeOut)
 
         } else if (sequence[i] === 3) {
             bottomRightEl.id = 'active'
-            playSound('Assets_Audio_G2.ogg')
+            playSound('G2.mp3')
             setTimeout(() => { bottomRightEl.id = '' }, timeOut)
 
         } else {
@@ -192,14 +191,12 @@ function assignClickClass() {
 
 function nextSequence() {
     sequence.push(Math.floor(Math.random() * 4))
-    console.log(sequence)
     assignClickClass()
 }
 
 function resetSequence() {
     if (currentGameMode === 'Simon') {
         sequence = []
-        console.log(sequence)
         currentScore = 0
         topLeftEl.inert = true
         topRightEl.inert = true
@@ -213,33 +210,28 @@ function resetSequence() {
 
 
     } else if (currentGameMode === 'Training') {
-        console.log('game mode is training, cannnot reset the sequence!')
-        console.log(sequence)
+
 
     }
 }
 
 function buttonPress() {
     let statusFailed = false
-    console.log('userinput: ' + userInput)
     if (userInput.length === sequence.length) {
         for (let index = 0; index < userInput.length; index++) {
-            console.log('index= ' + index + '... current sequence: ' + sequence[index] + ' ... user pressed: ' + userInput[index])
             if (parseInt(userInput[index]) === parseInt(sequence[index])) {
-                console.log('correct button')
             } else {
-                console.log('incorrect button')
                 if (currentGameMode === 'Simon') {
                     let lastscore = currentScore
                     resetSequence()
-                    playSound('lose.mp3')
+                    playSound('Lose.mp3')
                     youLoseImgEl.style.display = 'block'
                     youWinImgEl.style.display = 'none'
                     gameStatusParagraphEl.textContent = `Game Over! Your final score was ${lastscore}. Click Restart to play again.`
                     statusFailed = true
                     popupEl.style.display = 'flex'
                 } else if (currentGameMode === 'Training') {
-                    playSound('lose.mp3')
+                    playSound('Lose.mp3')
                     userInput = []
                     assignClickClass()
                     return
@@ -247,7 +239,7 @@ function buttonPress() {
             }
         }
         if (currentIndexToPress === finishCriteria) {
-            playSound('win.mp3')
+            playSound('Win.mp3')
             youLoseImgEl.style.display = 'none'
             youWinImgEl.style.display = 'block'
             gameStatusParagraphEl.textContent = `Victory! Your memory is perfect. You reached the max score of ${currentScore}!`
