@@ -79,14 +79,26 @@ startEl.addEventListener('click', () => {
         bottomRightEl.inert = true
         }       
         else if (cond === 2) {
-        i = 0
-        assignClickClass()
-        gameStart = true
-        startEl.classList = 'active'
-        topLeftEl.inert = false
-        topRightEl.inert = false
-        bottomLeftEl.inert = false
-        bottomRightEl.inert = false
+
+            if (sequence.length === 0) {
+                gameStart = true
+                nextSequence()
+                startEl.classList = 'active'
+                topLeftEl.inert = false
+                topRightEl.inert = false
+                bottomLeftEl.inert = false
+                bottomRightEl.inert = false
+            }else{
+                i = 0
+                assignClickClass()
+                gameStart = true
+                startEl.classList = 'active'
+                topLeftEl.inert = false
+                topRightEl.inert = false
+                bottomLeftEl.inert = false
+                bottomRightEl.inert = false
+            }
+
         }       
     }
     
@@ -130,40 +142,40 @@ function assignClickClass() {
             return
         } else {
             
-            if (sequence[i] === 0) {
-                topLeftEl.id = 'active'
-                setTimeout(() => { topLeftEl.id = '' }, timeOut)
-                // assignClickClass()
-                
-            } else if (sequence[i] === 1) {
-                topRightEl.id = 'active'
-                setTimeout(() => { topRightEl.id = '' }, timeOut)
-                // assignClickClass()
-                
-            } else if (sequence[i] === 2) {
-                bottomLeftEl.id = 'active'
-                setTimeout(() => { bottomLeftEl.id = '' }, timeOut)
-                // assignClickClass()
-                
-            } else if (sequence[i] === 3) {
-                bottomRightEl.id = 'active'
-                setTimeout(() => { bottomRightEl.id = '' }, timeOut)
-                // assignClickClass()
-                
-            } else {
-                // console.log(' Something went wrong... sequence length: ' + sequence.length + '. i= ' + i)
-                i = 0
-                return
-            }
             
-            // console.log(' 2 sequence length: ' + sequence.length + '. i= ' + i)
-            i++
-            setTimeout(() => { 
-                assignClickClass()
-            }, timeOut+100)
+
+                if (sequence[i] === 0) {
+                    topLeftEl.id = 'active'
+                    setTimeout(() => { topLeftEl.id = '' }, timeOut)
+                    
+                } else if (sequence[i] === 1) {
+                    topRightEl.id = 'active'
+                    setTimeout(() => { topRightEl.id = '' }, timeOut)
+                    
+                } else if (sequence[i] === 2) {
+                    bottomLeftEl.id = 'active'
+                    setTimeout(() => { bottomLeftEl.id = '' }, timeOut)
+                    
+                } else if (sequence[i] === 3) {
+                    bottomRightEl.id = 'active'
+                    setTimeout(() => { bottomRightEl.id = '' }, timeOut)
+                    
+                } else {
+                    // console.log(' Something went wrong... sequence length: ' + sequence.length + '. i= ' + i)
+                    i = 0
+                    return
+                }
+                
+                console.log('index to press: ' + currentIndexToPress+ '. i= ' + i)
+                i++
+                setTimeout(() => { 
+                    assignClickClass()
+                }, timeOut+100)
+                
+                // console.log(' 3 sequence length: ' + sequence.length + '. i= ' + i)
+                console.log('user needs to play: ' + (currentIndexToPress+1))
+
             
-            // console.log(' 3 sequence length: ' + sequence.length + '. i= ' + i)
-            console.log('user needs to play: ' + (currentIndexToPress+1))
             
         }
         
@@ -175,7 +187,7 @@ function nextSequence() {
     sequence.push(Math.floor(Math.random() * 4))
     console.log(sequence)
     assignClickClass()
-    // currentIndexToPress++
+    // currentIndexToPress = 0 
 }
 
 
